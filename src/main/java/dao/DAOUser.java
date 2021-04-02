@@ -5,7 +5,7 @@ import vo.User;
 
 import java.sql.*;
 
-public class DAOUser {
+public class DAOUser extends BaseDAO {
 
 	public User getUser(User user) throws SQLException {
 		String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
@@ -22,12 +22,7 @@ public class DAOUser {
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} finally {
-			if (connection != null && !connection.isClosed()){
-				connection.close();
-				ps.close();
-				rs.close();
-			}
-
+			finalizeDAO(connection, rs, ps);
 		}
 		return null;
 	}

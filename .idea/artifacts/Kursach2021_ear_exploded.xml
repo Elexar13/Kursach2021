@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="Kursach2021:ear exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Kursach2021_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Kursach2021/javaeeApplication/javaEEApplication" />
+      <element id="directory" name="web.war">
+        <element id="artifact" artifact-name="Kursach2021:war exploded" />
+      </element>
+    </root>
+  </artifact>
+</component>

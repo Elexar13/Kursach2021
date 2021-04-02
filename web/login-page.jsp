@@ -26,9 +26,9 @@
         <p>только один человек знал, кто изобрел пароход;</p>
     </div>
     <div id="content">
-        <form method="post" action="main.jsp">
-            <input type="email" value="mail"> <br>
-            <input type="password" value="pass">
+        <form id="login-form" method="post" action="/Kursach2021/login">
+            <input type="email" value="mail" name="mail"> <br>
+            <input type="password" value="pass" name="pass">
             <input type="submit" value="qwerty">
         </form>
     </div>

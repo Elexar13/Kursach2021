@@ -15,14 +15,16 @@ public class DAOUser extends BaseDAO {
 		try{
 			connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
 			ps = connection.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getPassword());
 			rs = ps.executeQuery();
 			if(rs.next()){
 				return new User(rs.getString("email"), rs.getString("password"));
 			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		} finally {
-			finalizeDAO(connection, rs, ps);
+			super.finalizeDAO(connection, rs, ps);
 		}
 		return null;
 	}

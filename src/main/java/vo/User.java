@@ -1,9 +1,13 @@
 package vo;
 
+import java.util.List;
+
 public class User {
+	private int userId;
 	private String email;
 	private String password;
 	private String isAdmin = "N";
+	private List<Apartment> apartments;
 
 	public User(String email, String password) {
 		this.email = email;
@@ -32,5 +36,21 @@ public class User {
 
 	public void setIsAdmin(String isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public List<Apartment> getApartments() {
+		return apartments;
+	}
+
+	public void setApartments(List<Apartment> apartments) {
+		this.apartments = apartments;
 	}
 }

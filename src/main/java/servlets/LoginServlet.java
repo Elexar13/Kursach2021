@@ -1,6 +1,8 @@
 package servlets;
 
 import dao.DAOUser;
+import org.json.JSONException;
+import org.json.JSONObject;
 import vo.User;
 
 import javax.servlet.RequestDispatcher;
@@ -23,24 +25,37 @@ public class LoginServlet extends HttpServlet {
 		String email = req.getParameter("mail");
 		String password = req.getParameter("pass");
 
-		User user = new User(email, password);
-		DAOUser daoUser = new DAOUser();
+//		User user = new User(email, password);
+//		DAOUser daoUser = new DAOUser();
+//		try {
+//			user = daoUser.getUser(user);
+//			RequestDispatcher dispatcher;
+//			if (user != null){
+//				dispatcher = req.getRequestDispatcher("main.jsp");
+//				dispatcher.forward(req, resp);
+//			} else {
+//				dispatcher = req.getRequestDispatcher("error.jsp");
+//				dispatcher.forward(req, resp);
+//			}
+//		} catch (SQLException throwable) {
+//			System.out.println("Exception in DB: LoginServlet - doPost.");
+//			throwable.printStackTrace();
+//		} catch (Exception ex) {
+//			System.out.println("Exception in LoginServlet - doPost.");
+//			ex.printStackTrace();
+//		}
+		JSONObject jsonObject = new JSONObject();
 		try {
-			user = daoUser.getUser(user);
-			RequestDispatcher dispatcher;
-			if (user != null){
-				dispatcher = req.getRequestDispatcher("main.jsp");
-				dispatcher.forward(req, resp);
-			} else {
-				dispatcher = req.getRequestDispatcher("error.jsp");
-				dispatcher.forward(req, resp);
-			}
-		} catch (SQLException throwable) {
-			System.out.println("Exception in DB: LoginServlet - doPost.");
-			throwable.printStackTrace();
-		} catch (Exception ex) {
-			System.out.println("Exception in LoginServlet - doPost.");
-			ex.printStackTrace();
+			jsonObject.put("mail", "email");
+			jsonObject.put("password", "password");
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
+//		RequestDispatcher dispatcher = req.getRequestDispatcher("main.jsp");
+//		dispatcher.forward(req, resp);
+		resp.setHeader("Access-Control-Allow-Origin", "*");
+		resp.setStatus(200);
+		resp.getWriter().write(jsonObject.toString());
+
 	}
 }

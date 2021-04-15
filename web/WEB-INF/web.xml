@@ -13,6 +13,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>login-page.jsp</welcome-file>
+        <welcome-file>/KursachFront/login-page.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

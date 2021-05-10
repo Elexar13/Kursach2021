@@ -8,7 +8,7 @@ import java.sql.*;
 public class DAOUser extends BaseDAO {
 
 	public User getUser(User user) throws SQLException {
-		String sql = "SELECT * FROM public.users WHERE email = ? AND password = ?";
+		String sql = "SELECT * FROM public.user WHERE email = ? AND password = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection connection = null;

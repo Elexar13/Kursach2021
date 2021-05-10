@@ -9,17 +9,17 @@ import {User} from '../entity/user';
 })
 export class StartComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
-  public user: User | null = null;
+  public user: User = new User();
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    // this.http.get(this.baseUrl + '/login').subscribe(
-    //   data => {
-    //         this.user = data;
-    //         console.log(this.user);
-    //   }
-    // );
+  }
+
+  public getUser(user: User){
+    console.log(user)
+    return this.http.post<any>(this.baseUrl + '/login', user)
+      .subscribe(result => console.log(result));
   }
 
 }

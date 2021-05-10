@@ -1,13 +1,19 @@
 package vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 	private int userId;
 	private String email;
 	private String password;
 	private String isAdmin = "N";
 	private List<Apartment> apartments;
+
+	public User() {
+	}
 
 	public User(String email, String password) {
 		this.email = email;

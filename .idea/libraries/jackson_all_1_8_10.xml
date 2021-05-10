@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jackson-all-1.8.10">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Kursach2021_war_exploded/WEB-INF/lib/jackson-all-1.8.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Kursach2021_war_exploded/WEB-INF/lib/jackson-core-2.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Kursach2021_war_exploded/WEB-INF/lib/jackson-annotations-2.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Kursach2021_war_exploded/WEB-INF/lib/jackson-databind-2.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

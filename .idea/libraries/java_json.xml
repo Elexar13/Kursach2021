@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="java-json">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/json-20210307.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Kursach2021_war_exploded/WEB-INF/lib/json-20210307.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

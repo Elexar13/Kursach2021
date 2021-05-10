@@ -1,5 +1,6 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.DAOUser;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -22,10 +24,21 @@ public class LoginServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("mail");
-		String password = req.getParameter("pass");
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+		String userJson = req.getParameter("user");
 
-		User user = new User(email, password);
+		BufferedReader reader = req.getReader();
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line);
+		}
+
+		ObjectMapper mapper = new ObjectMapper();
+		String json = sb.toString();
+		User user =  mapper.readValue(json, User.class);
+
 		DAOUser daoUser = new DAOUser();
 		JSONObject jsonObject = new JSONObject();
 		try {

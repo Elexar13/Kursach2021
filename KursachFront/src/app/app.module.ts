@@ -7,6 +7,7 @@ import { StartComponent } from './start/start.component';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 import { AlertModule } from 'ngx-bootstrap/alert';
+import {FormsModule} from "@angular/forms";
 
 const routes = [
   {path: 'start', component: StartComponent}
@@ -22,9 +23,12 @@ const routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

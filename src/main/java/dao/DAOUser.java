@@ -20,7 +20,7 @@ public class DAOUser extends BaseDAO {
 			ps.setString(2, user.getPassword());
 			rs = ps.executeQuery();
 			if(rs.next()){
-				return new User(rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"), rs.getString("is_admin"));
 			}
 		} catch (SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace();

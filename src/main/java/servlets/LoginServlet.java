@@ -25,32 +25,39 @@ public class LoginServlet extends HttpServlet {
 		String email = req.getParameter("mail");
 		String password = req.getParameter("pass");
 
-//		User user = new User(email, password);
-//		DAOUser daoUser = new DAOUser();
-//		try {
-//			user = daoUser.getUser(user);
-//			RequestDispatcher dispatcher;
-//			if (user != null){
-//				dispatcher = req.getRequestDispatcher("main.jsp");
-//				dispatcher.forward(req, resp);
-//			} else {
-//				dispatcher = req.getRequestDispatcher("error.jsp");
-//				dispatcher.forward(req, resp);
-//			}
-//		} catch (SQLException throwable) {
-//			System.out.println("Exception in DB: LoginServlet - doPost.");
-//			throwable.printStackTrace();
-//		} catch (Exception ex) {
-//			System.out.println("Exception in LoginServlet - doPost.");
-//			ex.printStackTrace();
-//		}
+		User user = new User(email, password);
+		DAOUser daoUser = new DAOUser();
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put("mail", "email");
-			jsonObject.put("password", "password");
-		} catch (JSONException e) {
-			e.printStackTrace();
+			user = daoUser.getUser(user);
+			RequestDispatcher dispatcher;
+			if (user != null){
+//				dispatcher = req.getRequestDispatcher("main.jsp");
+//				dispatcher.forward(req, resp);
+				try {
+					jsonObject.put("mail", user.getEmail());
+					jsonObject.put("password", user.getPassword());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			} else {
+//				dispatcher = req.getRequestDispatcher("error.jsp");
+//				dispatcher.forward(req, resp);
+				try {
+					jsonObject.put("mail", "unnamed email");
+					jsonObject.put("password", "unnamed password");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException throwable) {
+			System.out.println("Exception in DB: LoginServlet - doPost.");
+			throwable.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("Exception in LoginServlet - doPost.");
+			ex.printStackTrace();
 		}
+
 //		RequestDispatcher dispatcher = req.getRequestDispatcher("main.jsp");
 //		dispatcher.forward(req, resp);
 		resp.setHeader("Access-Control-Allow-Origin", "*");

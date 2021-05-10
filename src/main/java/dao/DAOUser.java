@@ -8,11 +8,12 @@ import java.sql.*;
 public class DAOUser extends BaseDAO {
 
 	public User getUser(User user) throws SQLException {
-		String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+		String sql = "SELECT * FROM public.users WHERE email = ? AND password = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection connection = null;
 		try{
+			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, user.getEmail());
@@ -21,7 +22,7 @@ public class DAOUser extends BaseDAO {
 			if(rs.next()){
 				return new User(rs.getString("email"), rs.getString("password"));
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		} finally {
 			super.finalizeDAO(connection, rs, ps);

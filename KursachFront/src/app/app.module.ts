@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 const routes = [
   {path: 'start', component: StartComponent}
@@ -17,6 +18,7 @@ const routes = [
     StartComponent
   ],
   imports: [
+    AlertModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -14,12 +14,12 @@ export class StartComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get(this.baseUrl + '/login').subscribe(
-      data => {
-            this.user = data;
-            console.log(this.user);
-      }
-    );
+    // this.http.get(this.baseUrl + '/login').subscribe(
+    //   data => {
+    //         this.user = data;
+    //         console.log(this.user);
+    //   }
+    // );
   }
 
 }

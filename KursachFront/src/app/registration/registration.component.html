@@ -1,0 +1,39 @@
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <form class="requires-validation" novalidate>
+            <div class="col-md-12">
+              <input class="form-control" type="email" name="email" placeholder="E-mail" [(ngModel)]="user.email" required>
+              <div class="valid-feedback">Некоректна пошта!</div>
+              <div class="invalid-feedback">Поле пошти не може бути пустим!</div>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="username" placeholder="Ім'я" [(ngModel)]="user.username" required>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="lastname" placeholder="Прізвище" [(ngModel)]="user.lastname" required>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="phoneNumber" placeholder="Номер телефону" [(ngModel)]="user.phoneNumber" required>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="password" name="password" placeholder="Пароль" [(ngModel)]="user.password" required>
+              <div class="valid-feedback">Некоректний пароль!</div>
+              <div class="invalid-feedback">Поле паролю не може бути пустим!</div>
+            </div>
+
+            <div class="form-button mt-3">
+              <button id="register" type="button" class="btn btn-primary" (click)="addUser(user)">Зареєструватись</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

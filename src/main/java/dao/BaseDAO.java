@@ -1,9 +1,8 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import vo.AppConstants;
+
+import java.sql.*;
 
 public abstract class BaseDAO {
 	static {
@@ -26,5 +25,10 @@ public abstract class BaseDAO {
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
+	}
+
+	protected Connection getConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("org.postgresql.Driver");
+		return DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
 	}
 }

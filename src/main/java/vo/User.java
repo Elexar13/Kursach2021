@@ -8,7 +8,10 @@ import java.util.List;
 public class User {
 	private int userId;
 	private String email;
+	private String username;
+	private String lastname;
 	private String password;
+	private String phoneNumber;
 	private String isAdmin = "N";
 	private List<Apartment> apartments;
 
@@ -20,10 +23,13 @@ public class User {
 		this.password = password;
 	}
 
-	public User(int userId, String email, String password, String isAdmin) {
+	public User(int userId, String email, String username, String lastname, String password, String phoneNumber, String isAdmin) {
 		this.userId = userId;
 		this.email = email;
+		this.username = username;
+		this.lastname = lastname;
 		this.password = password;
+		this.phoneNumber = phoneNumber;
 		this.isAdmin = isAdmin;
 	}
 
@@ -33,6 +39,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getPassword() {
@@ -65,5 +87,13 @@ public class User {
 
 	public void setApartments(List<Apartment> apartments) {
 		this.apartments = apartments;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

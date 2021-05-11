@@ -20,7 +20,7 @@ export class StartComponent implements OnInit {
 
   public getUser(user: User){
     console.log(user)
-    return this.http.post<any>(this.baseUrl + '/login', user)
+    return this.http.post<any>(this.baseUrl + '/user?actionName=getUser', user)
       .subscribe(result =>{
         console.log(result);
         this.isAdmin = result.isAdmin;

@@ -8,18 +8,20 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import {FormsModule} from "@angular/forms";
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes = [
-  {path: 'start', component: StartComponent}
+  {path: 'start', component: StartComponent},
+  {path: 'registration', component: RegistrationComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartComponent
+    StartComponent,
+    RegistrationComponent
   ],
   imports: [
-    AlertModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

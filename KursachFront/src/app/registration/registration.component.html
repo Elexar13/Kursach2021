@@ -28,8 +28,11 @@
               <div class="invalid-feedback">Поле паролю не може бути пустим!</div>
             </div>
 
-            <div class="form-button mt-3">
-              <button id="register" type="button" class="btn btn-primary" (click)="addUser(user)">Зареєструватись</button>
+            <div class="form-button mt-3 float-sm-start">
+              <button id="register" type="button" class="btn btn-light" (click)="addUser(user)">Зареєструватись</button>
+            </div>
+            <div class="form-button mt-3 float-sm-end">
+              <button id="back" type="button" class="btn btn-dark" routerLink="/start">Назад</button>
             </div>
           </form>
         </div>

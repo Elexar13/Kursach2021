@@ -1,18 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
-*, body {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-html, body {
-  height: 100%;
-  background-color: #152733;
-  overflow: hidden;
-}
 
 
 .form-holder {
@@ -22,6 +10,7 @@ html, body {
   align-items: center;
   text-align: center;
   min-height: 10vh;
+  background-color: #152733;
 }
 
 .form-holder .form-content {

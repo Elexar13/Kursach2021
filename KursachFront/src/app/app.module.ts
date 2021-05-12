@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StartComponent } from './start/start.component';
+import { StartComponent } from '../start/start.component';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import {FormsModule} from "@angular/forms";
-import { RegistrationComponent } from './registration/registration.component';
-import { MainComponent } from './main/main.component';
+import { RegistrationComponent } from '../registration/registration.component';
+import { MainComponent } from '../main/main.component';
 
 const routes = [
   {path: 'start', component: StartComponent},

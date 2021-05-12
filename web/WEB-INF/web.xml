@@ -19,5 +19,13 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdvertisementServlet</servlet-name>
+        <servlet-class>servlets.AdvertisementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdvertisementServlet</servlet-name>
+        <url-pattern>/advertisement</url-pattern>
+    </servlet-mapping>
 
 </web-app>

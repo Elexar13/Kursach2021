@@ -7,7 +7,10 @@ public class AppConstants {
 	public static String DATABASE_USER = "max";
 	public static String DATABASE_PASSWORD = "2187";
 
+	//////Action names
 	//UserServlet
 	public static String GET_USER = "getUser";
 	public static String ADD_USER = "addUser";
+	//AdvertisementServler
+	public static String GET__ALL_ADVERTISEMENT = "getAllAdvertisement";
 }

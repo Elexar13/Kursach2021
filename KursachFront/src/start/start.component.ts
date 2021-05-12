@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {User} from '../entity/user';
+import {provideRoutes, Router} from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -10,21 +11,25 @@ import {User} from '../entity/user';
 export class StartComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
   public user: User = new User();
-  public userId: number = 0;
-  public isAdmin: string = 'N';
+  public userId = 0;
+  public isAdmin = 'N';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  public getUser(user: User){
-    console.log(user)
+  public loginUser(user: User){
+    console.log(user);
     return this.http.post<any>(this.baseUrl + '/user?actionName=getUser', user)
-      .subscribe(result =>{
-        console.log(result);
+      .subscribe(result => {
         this.isAdmin = result.isAdmin;
         this.userId = result.userId;
+        if (result) {
+          this.router.navigate(['/main']);
+        } else {
+          console.log('There are no user');
+        }
       });
   }
 

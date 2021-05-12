@@ -1,1 +1,43 @@
-<p>main works!</p>
+<div class="form-body">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <form class="requires-validation" novalidate>
+            <div class="row">
+              <div class="col">
+                <select class="custom-select" >
+                  <option value="sale" selected>Придбати нерухомість</option>
+                  <option value="rent">Арендувати нерухомість</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <select class="custom-select" >
+                  <option value="none" selected>Місто</option>
+                  <option value="niko">Миколаїв</option>
+                  <option value="odessa">Одеса</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input class="form-control" type="number" min="0" step="1" name="countOfRoom" placeholder="Кількість кімнат" required>
+              </div>
+
+              <div class="col">
+                <input class="form-control" type="number" min="0" step="50" id="price" placeholder="Ціна $" required>
+              </div>
+
+              <div class="form-button mt-3 float-sm-start">
+                <button id="submit" type="button" class="btn btn-light">Пошук</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<li *ngFor="let advertisement of advertisements; index as i;">
+  {{i}}/{{advertisements.length}}. {{advertisement.adTitle}}
+</li>

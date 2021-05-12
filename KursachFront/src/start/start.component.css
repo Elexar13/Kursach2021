@@ -11,6 +11,10 @@
   text-align: center;
   min-height: 10vh;
   background-color: #152733;
+  width: 50%;
+  border-radius: 10px;
+  position: center;
+  margin: auto;
 }
 
 .form-holder .form-content {

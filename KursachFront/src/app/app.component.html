@@ -11,14 +11,28 @@
       </li>
     </ul>
   </div>
-  <button class="btn btn-circle active" style="margin-right: 1em"><i class="fa fa-user-circle fa-3x" aria-hidden="true"></i></button>
+  <button class="btn btn-circle active" style="margin-right: 1em"><i class="fal fa-user-circle fa-3x" aria-hidden="true"></i></button>
 
 </nav>
 <body>
 
-  <div class="content" role="main">
-    <router-outlet></router-outlet>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+
+    </div>
+    <div class="col-sm-8 text-left">
+      <div class="content" role="main">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+
+    </div>
   </div>
+</div>
+
+
 
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
   <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->

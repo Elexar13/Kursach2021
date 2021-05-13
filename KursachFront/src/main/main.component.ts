@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAdvertisment();
+    this.filterAdvertisement.city = 'Місто';
   }
 
   public getAllAdvertisment() {

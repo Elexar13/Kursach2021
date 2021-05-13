@@ -5,14 +5,14 @@
           <form class="requires-validation" novalidate>
             <div class="row">
               <div class="col">
-                <select class="custom-select" >
+                <select class="custom-select" [(ngModel)]="filterAdvertisement.type">
                   <option value="sale" selected>Придбати нерухомість</option>
                   <option value="rent">Арендувати нерухомість</option>
                 </select>
               </div>
 
               <div class="col">
-                <select class="custom-select" >
+                <select class="custom-select" [(ngModel)]="filterAdvertisement.city">
                   <option value="none" selected>Місто...</option>
                   <option value="niko">Миколаїв</option>
                   <option value="odessa">Одеса</option>
@@ -39,15 +39,15 @@
             </div>
             <div class="row">
               <div class="col">
-                <input class="form-control" type="number" min="0" step="1" name="countOfRoom" placeholder="Кількість кімнат" required>
+                <input class="form-control" type="number" min="0" step="1" name="countOfRoom" placeholder="Кількість кімнат" [(ngModel)]="filterAdvertisement.countOfRoom" required>
               </div>
 
               <div class="col">
-                <input class="form-control" type="number" min="0" step="50" id="price" placeholder="Ціна $" required>
+                <input class="form-control" type="number" min="0" step="50" id="price" placeholder="Ціна $" [(ngModel)]="filterAdvertisement.price" required>
               </div>
 
               <div class="form-button mt-3 float-sm-start">
-                <button id="submit" type="button" class="btn btn-light">Пошук</button>
+                <button id="submit" type="button" class="btn btn-light" (click)="getFilteredAdvertisement()">Пошук</button>
               </div>
             </div>
           </form>

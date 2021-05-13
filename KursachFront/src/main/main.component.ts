@@ -11,6 +11,7 @@ import {newArray} from "@angular/compiler/src/util";
 export class MainComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
   public advertisements: any;
+  public filterAdvertisement: Advertisement = new Advertisement();
 
   constructor(private http: HttpClient) {}
 
@@ -20,11 +21,15 @@ export class MainComponent implements OnInit {
 
   public getAllAdvertisment() {
     this.http.get<any>(this.baseUrl + '/advertisement?actionName=getAllAdvertisement')
-      .subscribe((adv: any) => {
-        console.log('advertismentList:');
-        console.log(adv);
-        this.advertisements = adv;
-        console.log(this.advertisements);
+      .subscribe((advList: any) => {
+        this.advertisements = advList;
+      });
+  }
+
+  public getFilteredAdvertisement() {
+    this.http.post<any>(this.baseUrl + '/advertisement?actionName=getFilteredAdvertisement', this.filterAdvertisement)
+      .subscribe((advList: any) => {
+        this.advertisements = advList;
       });
   }
 

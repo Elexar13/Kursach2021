@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Advertisement} from '../entity/advertisement';
-import {newArray} from "@angular/compiler/src/util";
+import {newArray} from '@angular/compiler/src/util';
+import {DataGetterService} from '../app/data-getter.service';
+import {User} from '../entity/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,14 +13,20 @@ import {newArray} from "@angular/compiler/src/util";
 })
 export class MainComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
+  public user: any;
+  filePath = '../../images/1.jpg';
   public advertisements: any;
   public filterAdvertisement: Advertisement = new Advertisement();
 
-  constructor(private http: HttpClient) {}
+  constructor(private dataGetter: DataGetterService,
+              private http: HttpClient,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.getAllAdvertisment();
     this.filterAdvertisement.city = 'Місто';
+    this.user = this.dataGetter.getUser();
+    console.log(this.user);
   }
 
   public getAllAdvertisment() {

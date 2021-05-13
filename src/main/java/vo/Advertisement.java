@@ -10,8 +10,13 @@ public class Advertisement {
     private Integer price;
     private Integer countOfRoom;
     private String description;
+    private String status;
+    private String filepath;
 
-    public Advertisement(Integer adId, User user, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description) {
+    public Advertisement() {
+    }
+
+    public Advertisement(Integer adId, User user, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description, String status, String filepath) {
         this.adId = adId;
         this.user = user;
         this.city = city;
@@ -20,6 +25,8 @@ public class Advertisement {
         this.price = price;
         this.countOfRoom = countOfRoom;
         this.description = description;
+        this.status = status;
+        this.filepath = filepath;
     }
 
     public Advertisement(Integer userId, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description) {
@@ -30,6 +37,13 @@ public class Advertisement {
         this.price = price;
         this.countOfRoom = countOfRoom;
         this.description = description;
+    }
+
+    public Advertisement(String city, String type, Integer price, Integer countOfRoom) {
+        this.city = city;
+        this.type = type;
+        this.price = price;
+        this.countOfRoom = countOfRoom;
     }
 
     public Integer getAdId() {

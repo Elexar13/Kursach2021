@@ -24,7 +24,7 @@ public class DAOAdvertisement extends BaseDAO{
             rs = ps.executeQuery();
             while(rs.next()){
                 User user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("username"), rs.getString("lastname"), rs.getString("password"), rs.getString("phone_number"), rs.getString("is_admin"));
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), user, rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), user, rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -56,10 +56,27 @@ public class DAOAdvertisement extends BaseDAO{
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
             ps = connection.prepareStatement(sql);
+            int i = 1;
+            if (filterAdvertisement.getType() != null){
+                ps.setString(i ,filterAdvertisement.getType());
+                i++;
+            }
+            if (filterAdvertisement.getCity() != null){
+                ps.setString(i ,filterAdvertisement.getCity());
+                i++;
+            }
+            if (filterAdvertisement.getPrice() != null){
+                ps.setInt(i ,filterAdvertisement.getPrice());
+                i++;
+            }
+            if (filterAdvertisement.getCountOfRoom() != null){
+                ps.setInt(i ,filterAdvertisement.getCountOfRoom());
+                i++;
+            }
             rs = ps.executeQuery();
             while(rs.next()){
                 User user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("username"), rs.getString("lastname"), rs.getString("password"), rs.getString("phone_number"), rs.getString("is_admin"));
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), user, rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), user, rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {

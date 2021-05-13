@@ -1,61 +1,104 @@
-<div class="form-body">
-    <div class="form-holder">
-      <div class="form-content">
-        <div class="form-items">
-          <form class="requires-validation" novalidate>
-            <div class="row">
-              <div class="col">
-                <select class="custom-select" [(ngModel)]="filterAdvertisement.type">
-                  <option value="sale" selected>Придбати нерухомість</option>
-                  <option value="rent">Арендувати нерухомість</option>
-                </select>
-              </div>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
 
-              <div class="col">
-                <select class="custom-select" [(ngModel)]="filterAdvertisement.city">
-                  <option selected>Місто...</option>
-                  <option value="niko">Миколаїв</option>
-                  <option value="odessa">Одеса</option>
-                  <option value="kiev">Київ</option>
-                  <option value="kharkov">Харків</option>
-                  <option value="dnepr">Дніпро</option>
-                  <option value="zapor">Запоріжжя</option>
-                  <option value="lvov">Лвів</option>
-                  <option value="rog">Кривий Ріг</option>
-                  <option value="vinnitsa">Вінниця</option>
-                  <option value="kherson">Херсон</option>
-                  <option value="chernihiv">Чернігів</option>
-                  <option value="poltava">Полтава</option>
-                  <option value="cherkassi">Черкаси</option>
-                  <option value="khmel">Хмельницький</option>
-                  <option value="chernivtsi">Чернівці</option>
-                  <option value="zhitomir">Житомир</option>
-                  <option value="summi">Сумми</option>
-                  <option value="rivne">Рівне</option>
-                  <option value="ternopil">Тернопіль</option>
-                  <option value="krop">Кропівницький</option>
-                </select>
+    </div>
+    <div class="col-sm-8 text-left">
+      <div class="content" role="main">
+        <div class="form-body">
+          <div class="form-holder">
+            <div class="form-content">
+              <div class="form-items">
+                <form class="requires-validation" novalidate>
+                  <div class="row">
+                    <div class="col">
+                      <select class="custom-select" [(ngModel)]="filterAdvertisement.type" name="type">
+                        <option value="sale" selected>Придбати нерухомість</option>
+                        <option value="rent">Арендувати нерухомість</option>
+                      </select>
+                    </div>
+
+                    <div class="col">
+                      <select class="custom-select" [(ngModel)]="filterAdvertisement.city" name="city">
+                        <option selected>Місто...</option>
+                        <option value="niko">Миколаїв</option>
+                        <option value="odessa">Одеса</option>
+                        <option value="kiev">Київ</option>
+                        <option value="kharkov">Харків</option>
+                        <option value="dnepr">Дніпро</option>
+                        <option value="zapor">Запоріжжя</option>
+                        <option value="lvov">Лвів</option>
+                        <option value="rog">Кривий Ріг</option>
+                        <option value="vinnitsa">Вінниця</option>
+                        <option value="kherson">Херсон</option>
+                        <option value="chernihiv">Чернігів</option>
+                        <option value="poltava">Полтава</option>
+                        <option value="cherkassi">Черкаси</option>
+                        <option value="khmel">Хмельницький</option>
+                        <option value="chernivtsi">Чернівці</option>
+                        <option value="zhitomir">Житомир</option>
+                        <option value="summi">Сумми</option>
+                        <option value="rivne">Рівне</option>
+                        <option value="ternopil">Тернопіль</option>
+                        <option value="krop">Кропівницький</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <input class="form-control" type="number" min="0" step="1" name="countOfRoom"
+                             placeholder="Кількість кімнат" [(ngModel)]="filterAdvertisement.countOfRoom" required>
+                    </div>
+
+                    <div class="col">
+                      <input class="form-control" type="number" min="0" step="50" id="price" name="price"
+                             placeholder="Ціна $" [(ngModel)]="filterAdvertisement.price" required>
+                    </div>
+
+                    <div class="form-button mt-3 float-sm-start">
+                      <button id="submit" type="button" class="btn btn-light" (click)="getFilteredAdvertisement()">
+                        Пошук
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-            <div class="row">
-              <div class="col">
-                <input class="form-control" type="number" min="0" step="1" name="countOfRoom" placeholder="Кількість кімнат" [(ngModel)]="filterAdvertisement.countOfRoom" required>
-              </div>
-
-              <div class="col">
-                <input class="form-control" type="number" min="0" step="50" id="price" placeholder="Ціна $" [(ngModel)]="filterAdvertisement.price" required>
-              </div>
-
-              <div class="form-button mt-3 float-sm-start">
-                <button id="submit" type="button" class="btn btn-light" (click)="getFilteredAdvertisement()">Пошук</button>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
+
+        <li *ngFor="let advertisement of advertisements; index as i;">
+          <div style="width: 50%; position: center">
+            <div class="row" >
+              <div class="col">
+                <img src="assets/img/1.jpg" height="250" width="350"/>
+              </div>
+            </div>
+            <div class="row text-end">
+              {{advertisement.adTitle}}
+            </div>
+            <div class="row text-end">
+              {{advertisement.price}} $
+            </div>
+            <div class="row text-end">
+              {{advertisement.countOfRoom}} $
+            </div>
+
+
+          </div>
+        </li>
+
       </div>
     </div>
+    <div class="col-sm-2 sidenav">
+      <div *ngIf="user.userId" class="list-group text-start">
+        <a href="#" class="list-group-item list-group-item-action bg-dark disabled text-center">
+          {{user.username}} {{user.lastname}}
+        </a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані оголошення</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>
+      </div>
+    </div>
+  </div>
 </div>
-
-<li *ngFor="let advertisement of advertisements; index as i;">
-  {{i}}/{{advertisements.length}}. {{advertisement.adTitle}}
-</li>

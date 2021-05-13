@@ -43,16 +43,17 @@ public class UserServlet extends HttpServlet {
         ServletUtil<User, User> servletUtil = new ServletUtil<>(req, resp);
         ObjectMapper mapper = new ObjectMapper();
         String json = servletUtil.parseJSONString();
-        User user =  mapper.readValue(json, User.class);
+        User userIn =  mapper.readValue(json, User.class);
 
         DAOUser daoUser = new DAOUser();
+        User userOut = null;
         try {
-            user = daoUser.getUser(user);
+            userOut = daoUser.getUser(userIn);
         } catch (Exception ex) {
             System.out.println("Exception in LoginServlet - doPost.");
             throw ex;
         }
-        servletUtil.sendObject(user);
+        servletUtil.sendObject(userOut);
     }
 
     private void addUser(HttpServletRequest req, HttpServletResponse resp) throws Exception{

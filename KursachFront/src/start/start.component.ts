@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {User} from '../entity/user';
 import {provideRoutes, Router} from '@angular/router';
+import {DataGetterService} from "../app/data-getter.service";
 
 @Component({
   selector: 'app-start',
@@ -14,18 +15,18 @@ export class StartComponent implements OnInit {
   public userId = 0;
   public isAdmin = 'N';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+              private dataGetter: DataGetterService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public loginUser(user: User){
-    console.log(user);
     return this.http.post<any>(this.baseUrl + '/user?actionName=getUser', user)
       .subscribe(result => {
-        this.isAdmin = result.isAdmin;
-        this.userId = result.userId;
-        if (result) {
+        this.dataGetter.setUser(result);
+        if (result.userId) {
           this.router.navigate(['/main']);
         } else {
           console.log('There are no user');

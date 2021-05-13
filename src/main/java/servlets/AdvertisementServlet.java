@@ -5,6 +5,7 @@ import dao.DAOAdvertisement;
 import utils.ServletUtil;
 import vo.Advertisement;
 import vo.AppConstants;
+import vo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +24,10 @@ public class AdvertisementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            if (AppConstants.GET__ALL_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
+            if (AppConstants.GET_ALL_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
                 getAllAdvertisement(req, resp);
+            } else if (AppConstants.GET_FILTERED_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
+                getFilteredAdvertisement(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
@@ -32,7 +35,7 @@ public class AdvertisementServlet extends HttpServlet {
 
     }
 
-    private void getAllAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public void getAllAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         ServletUtil<Integer, List<Advertisement>> servletUtil = new ServletUtil<>(req, resp);
         ObjectMapper mapper = new ObjectMapper();
         String json = servletUtil.parseJSONString();
@@ -41,6 +44,24 @@ public class AdvertisementServlet extends HttpServlet {
         List<Advertisement> advertisementList = null;
         try {
             advertisementList = daoAdvertisement.getAllAdvertisement();
+        } catch (Exception ex) {
+            System.out.println("Exception in LoginServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(advertisementList);
+    }
+
+    public void getFilteredAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Integer, List<Advertisement>> servletUtil = new ServletUtil<>(req, resp);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = servletUtil.parseJSONString();
+
+        Advertisement filterAdvertisement =  mapper.readValue(json, Advertisement.class);
+
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        List<Advertisement> advertisementList = null;
+        try {
+            advertisementList = daoAdvertisement.getFilteredAdvertisement(filterAdvertisement);
         } catch (Exception ex) {
             System.out.println("Exception in LoginServlet - doPost.");
             throw ex;

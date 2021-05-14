@@ -34,6 +34,12 @@ public class AppConstants {
 		CITY_MAP.put("krop", "Миколаїв");
 	}
 
+	public static Map<String, String> TYPE_MAP = new HashMap<>();
+	static {
+		TYPE_MAP.put("sale", "Придбати нерухомість");
+		TYPE_MAP.put("rent", "Арендувати нерухомість");
+	}
+
 	//////Action names
 	//UserServlet
 	public static String GET_USER = "getUser";

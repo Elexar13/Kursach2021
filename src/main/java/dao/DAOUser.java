@@ -13,8 +13,7 @@ public class DAOUser extends BaseDAO {
 		ResultSet rs = null;
 		Connection connection = null;
 		try{
-			Class.forName("org.postgresql.Driver");
-			connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
+			connection = super.getConnection();
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());

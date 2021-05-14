@@ -12,16 +12,17 @@
                 <form class="requires-validation" novalidate>
                   <div class="row">
                     <div class="col">
-                      <select class="custom-select" [(ngModel)]="filterAdvertisement.type" name="type">
-                        <option value="sale" selected>Придбати нерухомість</option>
+                      <label>Тип</label>
+                      <select class="custom-select" [(ngModel)]="filterAdvertisement.type" (change)="getFilteredAdvertisement()" name="type">
+                        <option  value="sale" selected>Придбати нерухомість</option>
                         <option value="rent">Арендувати нерухомість</option>
                       </select>
                     </div>
 
                     <div class="col">
-                      <select class="custom-select" [(ngModel)]="filterAdvertisement.city" name="city">
-                        <option selected>Місто...</option>
-                        <option value="niko">Миколаїв</option>
+                      <label>Місто</label>
+                      <select class="custom-select" [(ngModel)]="filterAdvertisement.city" (change)="getFilteredAdvertisement()" name="city">
+                        <option value="niko" selected>Миколаїв</option>
                         <option value="odessa">Одеса</option>
                         <option value="kiev">Київ</option>
                         <option value="kharkov">Харків</option>
@@ -47,19 +48,14 @@
                   <div class="row">
                     <div class="col">
                       <input class="form-control" type="number" min="0" step="1" name="countOfRoom"
-                             placeholder="Кількість кімнат" [(ngModel)]="filterAdvertisement.countOfRoom" required>
+                             placeholder="Кількість кімнат" [(ngModel)]="filterAdvertisement.countOfRoom" (change)="getFilteredAdvertisement()" required>
                     </div>
 
                     <div class="col">
                       <input class="form-control" type="number" min="0" step="50" id="price" name="price"
-                             placeholder="Ціна $" [(ngModel)]="filterAdvertisement.price" required>
+                             placeholder="Ціна $" [(ngModel)]="filterAdvertisement.price" (change)="getFilteredAdvertisement()" required>
                     </div>
 
-                    <div class="form-button mt-3 float-sm-start">
-                      <button id="submit" type="button" class="btn btn-light" (click)="getFilteredAdvertisement()">
-                        Пошук
-                      </button>
-                    </div>
                   </div>
                 </form>
               </div>

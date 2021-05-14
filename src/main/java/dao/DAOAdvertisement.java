@@ -18,8 +18,7 @@ public class DAOAdvertisement extends BaseDAO{
         ResultSet rs = null;
         Connection connection = null;
         try{
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
+            connection = super.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -38,8 +37,11 @@ public class DAOAdvertisement extends BaseDAO{
     public List<Advertisement> getFilteredAdvertisement(Advertisement filterAdvertisement) {
         List<Advertisement> advertisementList = new ArrayList<>();
         String sql = "SELECT * FROM public.advertisement a" +
-                " INNER JOIN public.user u ON a.user_id = u.user_id WHERE type = ? ";
-        if (filterAdvertisement.getCity() != null){
+                " INNER JOIN public.user u ON a.user_id = u.user_id WHERE user_id IS NOT NULL ";
+        if (filterAdvertisement.getType() != null && AppConstants.TYPE_MAP.containsKey(filterAdvertisement.getType())){
+            sql += "AND type = ? ";
+        }
+        if (filterAdvertisement.getCity() != null && AppConstants.CITY_MAP.containsKey(filterAdvertisement.getCity())){
             sql += "AND city = ? ";
         }
         if (filterAdvertisement.getPrice() != null){
@@ -53,8 +55,7 @@ public class DAOAdvertisement extends BaseDAO{
         ResultSet rs = null;
         Connection connection = null;
         try{
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(AppConstants.DATABASE_URL, AppConstants.DATABASE_USER, AppConstants.DATABASE_PASSWORD);
+            connection = super.getConnection();
             ps = connection.prepareStatement(sql);
             int i = 1;
             if (filterAdvertisement.getType() != null){

@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
   }
 
   public getFilteredAdvertisement() {
+    console.log(this.filterAdvertisement)
     this.http.post<any>(this.baseUrl + '/advertisement?actionName=getFilteredAdvertisement', this.filterAdvertisement)
       .subscribe((advList: any) => {
         this.advertisements = advList;

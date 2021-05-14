@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 export class MainComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
   public user: any;
+  public fav: boolean;
   filePath = '../../images/1.jpg';
   public advertisements: any;
   public filterAdvertisement: Advertisement = new Advertisement();

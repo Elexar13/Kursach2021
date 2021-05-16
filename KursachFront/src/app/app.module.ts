@@ -13,12 +13,14 @@ import { MainComponent } from '../main/main.component';
 import { AdvertisementComponent } from '../advertisement/advertisement.component';
 import {Advertisement} from "../entity/advertisement";
 import {DataGetterService} from './data-getter.service';
+import { FavoritesComponent } from '../favorites/favorites.component';
 
 const routes = [
   {path: 'start', component: StartComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'main', component: MainComponent},
-  {path: 'advertisement', component: AdvertisementComponent}
+  {path: 'advertisement', component: AdvertisementComponent},
+  {path: 'favorites', component: FavoritesComponent}
 ];
 
 @NgModule({
@@ -27,7 +29,8 @@ const routes = [
     StartComponent,
     RegistrationComponent,
     MainComponent,
-    AdvertisementComponent
+    AdvertisementComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

@@ -5,52 +5,59 @@
     </div>
     <div class="col-sm-8 text-left">
       <div class="content" role="main">
-<div class="form-body">
-  <div class="row">
-    <div class="form-holder">
-      <div class="form-content">
-        <div class="form-items">
-          <form class="requires-validation" novalidate>
-            <div class="col-md-12">
-              <input class="form-control" type="email" name="email" placeholder="E-mail" [(ngModel)]="user.email" required>
-              <div class="valid-feedback">Некоректна пошта!</div>
-              <div class="invalid-feedback">Поле пошти не може бути пустим!</div>
-            </div>
+        <div class="form-body">
+          <div class="row">
+            <div class="form-holder">
+              <div class="form-content">
+                <div class="form-items">
+                  <form class="requires-validation" novalidate>
+                    <div class="col-md-12">
+                      <input class="form-control" type="email" name="email" placeholder="E-mail"
+                             [(ngModel)]="user.email" required>
+                      <div class="valid-feedback">Некоректна пошта!</div>
+                      <div class="invalid-feedback">Поле пошти не може бути пустим!</div>
+                    </div>
 
-            <div class="col-md-12">
-              <input class="form-control" type="text" name="username" placeholder="Ім'я" [(ngModel)]="user.username" required>
-            </div>
+                    <div class="col-md-12">
+                      <input class="form-control" type="text" name="username" placeholder="Ім'я"
+                             [(ngModel)]="user.username" required>
+                    </div>
 
-            <div class="col-md-12">
-              <input class="form-control" type="text" name="lastname" placeholder="Прізвище" [(ngModel)]="user.lastname" required>
-            </div>
+                    <div class="col-md-12">
+                      <input class="form-control" type="text" name="lastname" placeholder="Прізвище"
+                             [(ngModel)]="user.lastname" required>
+                    </div>
 
-            <div class="col-md-12">
-              <input class="form-control" type="text" name="phoneNumber" placeholder="Номер телефону" [(ngModel)]="user.phoneNumber" required>
-            </div>
+                    <div class="col-md-12">
+                      <input class="form-control" type="text" name="phoneNumber" placeholder="Номер телефону"
+                             [(ngModel)]="user.phoneNumber" required>
+                    </div>
 
-            <div class="col-md-12">
-              <input class="form-control" type="password" name="password" placeholder="Пароль" [(ngModel)]="user.password" required>
-              <div class="valid-feedback">Некоректний пароль!</div>
-              <div class="invalid-feedback">Поле паролю не може бути пустим!</div>
-            </div>
+                    <div class="col-md-12">
+                      <input class="form-control" type="password" name="password" placeholder="Пароль"
+                             [(ngModel)]="user.password" required>
+                      <div class="valid-feedback">Некоректний пароль!</div>
+                      <div class="invalid-feedback">Поле паролю не може бути пустим!</div>
+                    </div>
 
-            <div class="form-button mt-3 float-sm-start">
-              <button id="register" type="button" class="btn btn-light" (click)="addUser(user)">Зареєструватись</button>
+                    <div class="form-button mt-3 float-sm-start">
+                      <button id="register" type="button" class="btn btn-light" (click)="addUser(user)">
+                        Зареєструватись
+                      </button>
+                    </div>
+                    <div class="form-button mt-3 float-sm-end">
+                      <button id="back" type="button" class="btn btn-dark" routerLink="/start">Назад</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="form-button mt-3 float-sm-end">
-              <button id="back" type="button" class="btn btn-dark" routerLink="/start">Назад</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
-</div>
-<div class="col-sm-2 sidenav">
+    <div class="col-sm-2 sidenav">
 
-</div>
-</div>
+    </div>
+  </div>
 </div>

@@ -40,7 +40,7 @@ export class AdvertisementComponent implements OnInit {
   }
 
   public getUserById(userId: number){
-    return this.http.get<any>(this.baseUrl + '/user?actionName=getUserById&userId=' + userId)
+    return this.dataGetter.getUserById(userId)
       .subscribe(user => {
         this.user = user;
       });
@@ -81,6 +81,11 @@ export class AdvertisementComponent implements OnInit {
           console.log("Видалення не успішне");
         }
       });
+  }
+
+  goToFavorites() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.goToFavorites();
   }
 
 }

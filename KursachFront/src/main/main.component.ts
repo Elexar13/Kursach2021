@@ -49,10 +49,14 @@ export class MainComponent implements OnInit {
   }
 
   goToAdvertisementView(advertisement: Advertisement) {
-    console.log(advertisement.userId);
     this.dataGetter.setUserId(advertisement.userId);
     this.dataGetter.setCurrentUserId(this.user.userId);
     this.dataGetter.setAdvertisement(advertisement);
     this.router.navigate(['/advertisement']);
+  }
+
+  goToFavorites() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.goToFavorites();
   }
 }

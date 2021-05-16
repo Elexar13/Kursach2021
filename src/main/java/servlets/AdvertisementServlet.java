@@ -24,9 +24,7 @@ public class AdvertisementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            if (AppConstants.GET_ALL_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
-                getAllAdvertisement(req, resp);
-            } else if (AppConstants.GET_FILTERED_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
+            if (AppConstants.GET_FILTERED_ADVERTISEMENT.equals(req.getParameter("actionName"))) {
                 getFilteredAdvertisement(req, resp);
             } else if (AppConstants.ADD_ADVERTISEMENT_TO_FAVORITES.equals(req.getParameter("actionName"))) {
                 addAdvertisementToFavorite(req, resp);

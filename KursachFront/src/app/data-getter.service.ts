@@ -33,6 +33,10 @@ export class DataGetterService {
     return this.userId;
   }
 
+  public getUserById(userId: number){
+    return this.http.get<any>(this.baseUrl + '/user?actionName=getUserById&userId=' + userId);
+  }
+
   logOut() {
     return this.http.get<any>(this.baseUrl + '/user?actionName=logOut')
       .subscribe(res => {
@@ -58,5 +62,13 @@ export class DataGetterService {
 
   getCurrentUserId() {
     return this.currentUserId;
+  }
+
+  goToAdvertisementView() {
+    this.router.navigate(['/advertisement']);
+  }
+
+  goToFavorites() {
+    this.router.navigate(['/favorites']);
   }
 }

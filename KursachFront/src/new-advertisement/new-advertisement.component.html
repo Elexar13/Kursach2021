@@ -17,7 +17,7 @@
                     <div class="col-4" style="margin-left: 50px">
                     <select class="custom-select" [(ngModel)]="advertisement.type" name="type" style="width: 250px">
                       <option value="sale" selected>Придбати нерухомість</option>
-                      <option value="rent">Арендувати нерухомість</option>
+                      <option value="rent">Орендувати нерухомість</option>
                     </select>
                     </div>
                   </div>
@@ -97,7 +97,7 @@
                              (change)="onFileSelected($event)" style="width: 500px;" required>
                     </div>
                   </div>
-                  <div *ngIf="editMode == 'off'" class="form-button mt-3 float-sm-start">
+                  <div class="form-button mt-3 float-sm-start">
                     <button id="add" type="button" class="btn btn-light" (click)="addAdvertisement(advertisement)">Додати</button>
                   </div>
                   <div *ngIf="editMode == 'on'" class="form-button mt-3 float-sm-start">

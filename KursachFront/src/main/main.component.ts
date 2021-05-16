@@ -27,6 +27,9 @@ export class MainComponent implements OnInit {
       if (user == null || !user.userId){
         this.router.navigate(['/start']);
       } else {
+        if (user.isAdmin === 'Y'){
+          this.router.navigate(['/admin-view']);
+        }
         this.user = user;
       }
     });
@@ -34,7 +37,7 @@ export class MainComponent implements OnInit {
   }
 
   public getFilteredAdvertisement() {
-    this.http.post<any>(this.baseUrl + '/advertisement?actionName=getFilteredAdvertisement', this.filterAdvertisement)
+    this.dataGetter.getFilteredAdvertisement(this.filterAdvertisement)
       .subscribe((advList: any) => {
         this.advertisements = advList;
       });

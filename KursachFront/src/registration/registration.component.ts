@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../entity/user";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,7 @@ export class RegistrationComponent implements OnInit {
   public user: User = new User();
   public userId: number = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +22,7 @@ export class RegistrationComponent implements OnInit {
     this.http.post<any>(this.baseUrl + '/user?actionName=addUser', user)
       .subscribe(userId => {
         this.userId = userId;
-        console.log(userId);
-        console.log(this.userId);
+        this.router.navigate(['/main']);
       });
   }
 

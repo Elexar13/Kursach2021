@@ -12,9 +12,6 @@
                 <div class="col">
                   <img src="{{advertisement.filePath}}" height="350" width="450"/>
                 </div>
-                <div class="col text-end">
-                  {{advertisement.status}}
-                </div>
               </div>
               <div class="row text-start">
                 <div class="col text-start">
@@ -33,8 +30,8 @@
               </div>
               <div class="row text-end">
                 <div class="col">
-                  <button class="btn" (click)="goToEditAdvertisement(advertisement)"><i class="bi bi-pen-fill text-end"></i></button>
-                  <button class="btn"><i (click)="deleteAdvertisement(advertisement.adId)" class="bi bi-trash text-end"></i></button>
+                  <button class="btn btn-success" (click)="approvePublication(advertisement.adId)" style="margin-right: 10px">Підтвердити публікацію</button>
+                  <button class="btn btn-danger" (click)="rejectPublication(advertisement.adId)">Відхилити публікацію</button>
                 </div>
               </div>
             </div>
@@ -47,9 +44,6 @@
         <a href="#" class="list-group-item list-group-item-action bg-dark disabled text-center">
           {{user.username}} {{user.lastname}}
         </a>
-        <a (click)="goToAddNewAdvertisement()" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
-        <a (click)="goToMyAdvertisements()" class="list-group-item list-group-item-action"><i class="bi bi-house-fill"></i> Мої оголошення</a>
-        <a (click)="goToFavorites()" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані оголошення</a>
         <a href="/start" (click)="logOut()" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>
       </div>
     </div>

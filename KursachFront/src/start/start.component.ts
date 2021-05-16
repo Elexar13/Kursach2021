@@ -27,7 +27,13 @@ export class StartComponent implements OnInit {
       .subscribe(result => {
         if (result.userId) {
           this.dataGetter.setUser(result);
-          this.router.navigate(['/main']);
+          console.log('START');
+          console.log(result);
+          if (result.isAdmin === 'Y'){
+            this.router.navigate(['/admin-view']);
+          } else {
+            this.router.navigate(['/main']);
+          }
         } else {
           console.log('There are no user');
         }

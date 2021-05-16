@@ -96,6 +96,8 @@ public class UserServlet extends HttpServlet {
         Integer userId = null;
         try {
             userId = daoUser.addUser(user);
+            HttpSession session = req.getSession();
+            session.setAttribute("currentUser", user);
         } catch (Exception ex) {
             System.out.println("Exception in UserServlet - doPost.");
             throw ex;

@@ -181,7 +181,7 @@ public class DAOAdvertisement extends BaseDAO{
 
     public List<Advertisement> getAdvertisementsOfCurrentUser(Integer currentUserId) {
         List<Advertisement> advertisementList = new ArrayList<>();
-        String sql = "SELECT * FROM advertisement WHERE user_id = ? AND status = 'approved'";
+        String sql = "SELECT * FROM advertisement WHERE user_id = ? ";
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection connection = null;
@@ -276,6 +276,67 @@ public class DAOAdvertisement extends BaseDAO{
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw ex;
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+    }
+
+    public List<Advertisement> getAdminAdvertisements() {
+        List<Advertisement> advertisementList = new ArrayList<>();
+        String sql = "SELECT * FROM public.advertisement a" +
+                " WHERE status = 'waiting_for_approve' ORDER BY create_date";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("ad_address"), rs.getString("status"), rs.getString("filepath"));
+                advertisementList.add(advertisement);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+        return advertisementList;
+    }
+
+    public void approvePublication(Integer advertisementId) {
+        List<Advertisement> advertisementList = new ArrayList<>();
+        String sql = "UPDATE public.advertisement " +
+                " SET status = 'approved' WHERE ad_id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, advertisementId);
+            rs = ps.executeQuery();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+    }
+
+    public void rejectPublication(Integer advertisementId) {
+        List<Advertisement> advertisementList = new ArrayList<>();
+        String sql = "UPDATE public.advertisement " +
+                " SET status = 'rejected' WHERE ad_id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, advertisementId);
+            rs = ps.executeQuery();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             super.finalizeDAO(connection, rs, ps);
         }

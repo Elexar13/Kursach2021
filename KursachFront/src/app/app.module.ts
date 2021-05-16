@@ -16,6 +16,7 @@ import {DataGetterService} from './data-getter.service';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { MyAdvertisementsComponent } from '../my-advertisements/my-advertisements.component';
 import { NewAdvertisementComponent } from '../new-advertisement/new-advertisement.component';
+import { AdminViewComponent } from '../admin-view/admin-view.component';
 
 const routes = [
   {path: 'start', component: StartComponent},
@@ -24,7 +25,8 @@ const routes = [
   {path: 'advertisement', component: AdvertisementComponent},
   {path: 'favorites', component: FavoritesComponent},
   {path: 'my-advertisement', component: MyAdvertisementsComponent},
-  {path: 'new-advertisement', component: NewAdvertisementComponent}
+  {path: 'new-advertisement', component: NewAdvertisementComponent},
+  {path: 'admin-view', component: AdminViewComponent}
 ];
 
 @NgModule({
@@ -36,7 +38,8 @@ const routes = [
     AdvertisementComponent,
     FavoritesComponent,
     MyAdvertisementsComponent,
-    NewAdvertisementComponent
+    NewAdvertisementComponent,
+    AdminViewComponent
   ],
   imports: [
     BrowserModule,

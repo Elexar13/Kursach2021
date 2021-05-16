@@ -39,6 +39,10 @@ export class DataGetterService {
     return this.http.get<any>(this.baseUrl + '/user?actionName=getUserById&userId=' + userId);
   }
 
+  public getFilteredAdvertisement(filterAdvertisement: any) {
+    return this.http.post<any>(this.baseUrl + '/advertisement?actionName=getFilteredAdvertisement', filterAdvertisement);
+  }
+
   logOut() {
     return this.http.get<any>(this.baseUrl + '/user?actionName=logOut')
       .subscribe(res => {

@@ -10,11 +10,15 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import {FormsModule} from "@angular/forms";
 import { RegistrationComponent } from '../registration/registration.component';
 import { MainComponent } from '../main/main.component';
+import { AdvertisementComponent } from '../advertisement/advertisement.component';
+import {Advertisement} from "../entity/advertisement";
+import {DataGetterService} from './data-getter.service';
 
 const routes = [
   {path: 'start', component: StartComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'main', component: MainComponent}
+  {path: 'main', component: MainComponent},
+  {path: 'advertisement', component: AdvertisementComponent}
 ];
 
 @NgModule({
@@ -22,7 +26,8 @@ const routes = [
     AppComponent,
     StartComponent,
     RegistrationComponent,
-    MainComponent
+    MainComponent,
+    AdvertisementComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ const routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [],
+  providers: [DataGetterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

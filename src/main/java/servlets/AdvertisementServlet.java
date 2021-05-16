@@ -34,11 +34,30 @@ public class AdvertisementServlet extends HttpServlet {
                 getFavoritesForCurrentUser(req, resp);
             } else if (AppConstants.REMOVE_FROM_FAVORITES_FOR_CURRENT_USER.equals(req.getParameter("actionName"))) {
                 removeFromFavoritesForCurrentUser(req, resp);
+            } else if (AppConstants.GET_FAVOR_BY_USER_ID_AND_AD_ID.equals(req.getParameter("actionName"))) {
+                getFavorByIdAndAdId(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void getFavorByIdAndAdId(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Integer, Integer> servletUtil = new ServletUtil<>(req, resp);
+
+        Integer userId = Integer.valueOf(req.getParameter("userId"));
+        Integer advertisementId = Integer.valueOf(req.getParameter("adId"));
+
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        List<Advertisement> advertisementList = null;
+        try {
+            advertisementId = daoAdvertisement.getFavorByIdAndAdId(userId, advertisementId);
+        } catch (Exception ex) {
+            System.out.println("Exception in AdvertisementServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(advertisementId);
     }
 
     private void removeFromFavoritesForCurrentUser(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -54,7 +73,7 @@ public class AdvertisementServlet extends HttpServlet {
             advertisementId = mapper.readValue(json, Integer.class);
             advertisementId = daoAdvertisement.removeFromFavoritesForCurrentUser(currentUserId, advertisementId);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(advertisementId);
@@ -73,7 +92,7 @@ public class AdvertisementServlet extends HttpServlet {
             advertisementId = mapper.readValue(json, Integer.class);
             advertisementId = daoAdvertisement.addAdvertisementToFavorite(currentUserId, advertisementId);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(advertisementId);
@@ -81,8 +100,6 @@ public class AdvertisementServlet extends HttpServlet {
 
     private void getFavoritesForCurrentUser(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         ServletUtil<Integer, List<Advertisement>> servletUtil = new ServletUtil<>(req, resp);
-        ObjectMapper mapper = new ObjectMapper();
-        String json = servletUtil.parseJSONString();
 
         User user = (User) req.getSession().getAttribute("currentUser");
         Integer currentUserId = user.getUserId();
@@ -92,7 +109,7 @@ public class AdvertisementServlet extends HttpServlet {
         try {
             advertisementList = daoAdvertisement.getFavoritesForCurrentUser(currentUserId);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(advertisementList);
@@ -107,7 +124,7 @@ public class AdvertisementServlet extends HttpServlet {
         try {
             advertisementList = daoAdvertisement.getAllAdvertisement();
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(advertisementList);
@@ -125,7 +142,7 @@ public class AdvertisementServlet extends HttpServlet {
         try {
             advertisementList = daoAdvertisement.getFilteredAdvertisement(filterAdvertisement);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(advertisementList);

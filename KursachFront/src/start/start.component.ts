@@ -25,8 +25,8 @@ export class StartComponent implements OnInit {
   public loginUser(user: User){
     return this.http.post<any>(this.baseUrl + '/user?actionName=getUser', user)
       .subscribe(result => {
-        this.dataGetter.setUser(result);
         if (result.userId) {
+          this.dataGetter.setUser(result);
           this.router.navigate(['/main']);
         } else {
           console.log('There are no user');

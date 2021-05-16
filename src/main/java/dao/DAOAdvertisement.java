@@ -155,4 +155,27 @@ public class DAOAdvertisement extends BaseDAO{
             super.finalizeDAO(connection, rs, ps);
         }
     }
+
+    public Integer getFavorByIdAndAdId(Integer userId, Integer advertisementId) {
+        String sql = "SELECT * FROM user_favorites uf " +
+                " WHERE uf.user_id = ? and uf.advertisement_id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setInt(2, advertisementId);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getInt("advertisement_id");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+        return null;
+    }
 }

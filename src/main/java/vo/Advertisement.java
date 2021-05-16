@@ -12,6 +12,7 @@ public class Advertisement {
     private String description;
     private String status;
     private String filePath;
+
     private String isFavorite;
 
     public Advertisement() {
@@ -133,5 +134,13 @@ public class Advertisement {
 
     public void setFilePath(String filepath) {
         this.filePath = filepath;
+    }
+
+    public String getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(String isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }

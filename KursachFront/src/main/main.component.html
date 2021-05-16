@@ -64,15 +64,15 @@
         </div>
 
         <li *ngFor="let advertisement of advertisements; index as i;">
-          <div style="width: 40%; position: center; margin: 10px; border: 1px solid #222; border-radius: 4px">
+          <div style="width: 65%; margin: auto; border: 1px solid #222; border-radius: 4px">
             <div class="row" style="margin-top: 10px">
               <div class="col">
-                <img src="{{advertisement.filePath}}" height="250" width="350"/>
+                <img src="{{advertisement.filePath}}" height="350" width="450"/>
               </div>
             </div>
             <div class="row text-start">
-              <div class="col text-start">
-                {{advertisement.adTitle}}
+              <div class="col text-start" (click)="goToAdvertisementView(advertisement)">
+                <a class="link-dark" (click)="goToAdvertisementView(advertisement)">{{advertisement.adTitle}}</a>
               </div>
             </div>
             <div class="row text-start">
@@ -85,24 +85,25 @@
                 {{advertisement.countOfRoom}} кімнат
               </div>
             </div>
-            <div class="row text-end">
-              <div class="col">
-                <button class="btn"><i class="bi bi-heart text-end" style="margin: 10px"></i></button>
-              </div>
-              <div class="col">
-                <button class="btn"><i class="bi bi-heart-fill text-end" style="margin: 10px"></i></button>
-              </div>
-            </div>
+<!--            <div class="row text-end">-->
+<!--              <div class="col">-->
+<!--                <button class="btn"><i class="bi bi-heart text-end" style="margin: 10px"></i></button>-->
+<!--              </div>-->
+<!--              <div class="col">-->
+<!--                <button class="btn"><i class="bi bi-heart-fill text-end" style="margin: 10px"></i></button>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </li>
       </div>
     </div>
     <div class="col-sm-2 sidenav">
-      <div *ngIf="user.userId" class="list-group text-start">
+      <div *ngIf="user.userId" class="list-group text-start" style="position: fixed;">
         <a href="#" class="list-group-item list-group-item-action bg-dark disabled text-center">
           {{user.username}} {{user.lastname}}
         </a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
+        <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-house-fill"></i> Мої оголошення</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані оголошення</a>
         <a href="/start" (click)="logOut()" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>
       </div>

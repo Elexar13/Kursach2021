@@ -37,11 +37,28 @@ public class UserServlet extends HttpServlet {
                 getCurrentUser(req, resp);
             } else if (AppConstants.LOG_OUT.equals(req.getParameter("actionName"))) {
                 logOut(req, resp);
+            } else if (AppConstants.GET_USER_BY_ID.equals(req.getParameter("actionName"))) {
+                getUserById(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void getUserById(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Integer, User> servletUtil = new ServletUtil<>(req, resp);
+        Integer userId = Integer.valueOf(req.getParameter("userId"));
+
+        DAOUser daoUser = new DAOUser();
+        User user = null;
+        try {
+            user = daoUser.getUserById(userId);
+        } catch (Exception ex) {
+            System.out.println("Exception in UserServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(user);
     }
 
     private void getCurrentUser(HttpServletRequest req, HttpServletResponse resp) {
@@ -63,7 +80,7 @@ public class UserServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("currentUser", userOut);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in UserServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(userOut);
@@ -80,7 +97,7 @@ public class UserServlet extends HttpServlet {
         try {
             userId = daoUser.addUser(user);
         } catch (Exception ex) {
-            System.out.println("Exception in LoginServlet - doPost.");
+            System.out.println("Exception in UserServlet - doPost.");
             throw ex;
         }
         servletUtil.sendObject(userId);

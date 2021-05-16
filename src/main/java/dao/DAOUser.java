@@ -54,4 +54,25 @@ public class DAOUser extends BaseDAO {
 			super.finalizeDAO(connection, rs, ps);
 		}
 	}
+
+	public User getUserById(Integer userId) {
+		String sql = "SELECT * FROM public.user WHERE user_id = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection connection = null;
+		try{
+			connection = super.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				return new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("username"), rs.getString("lastname"), rs.getString("password"), rs.getString("phone_number"), rs.getString("is_admin"));
+			}
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+		} finally {
+			super.finalizeDAO(connection, rs, ps);
+		}
+		return null;
+	}
 }

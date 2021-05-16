@@ -13,17 +13,16 @@ import {Router} from '@angular/router';
 export class MainComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
   public user: User = new User();
-  filePath = '../../images/1.jpg';
   public advertisements: any;
   public favoriteAdvertisements: any;
   public filterAdvertisement: Advertisement = new Advertisement();
-
   constructor(private dataGetter: DataGetterService,
               private http: HttpClient,
-              private router: Router) {}
+              private router: Router)
+  {}
 
   ngOnInit(): void {
-    this.getCurrentUser().subscribe(user => {
+    this.dataGetter.getCurrentUser().subscribe(user => {
       console.log(user);
       if (user == null || !user.userId){
         this.router.navigate(['/start']);
@@ -31,15 +30,7 @@ export class MainComponent implements OnInit {
         this.user = user;
       }
     });
-    this.getFavoritesForCurrentUser();
     this.getFilteredAdvertisement();
-  }
-
-  public getAllAdvertisment() {
-    this.http.get<any>(this.baseUrl + '/advertisement?actionName=getAllAdvertisement')
-      .subscribe((advList: any) => {
-        this.advertisements = advList;
-      });
   }
 
   public getFilteredAdvertisement() {
@@ -49,19 +40,19 @@ export class MainComponent implements OnInit {
       });
   }
 
-  public getCurrentUser(){
-    return this.http.get<any>(this.baseUrl + '/user?actionName=getCurrentUser');
-  }
-
   public logOut(){
-    return this.http.get<any>(this.baseUrl + '/user?actionName=logOut')
-      .subscribe(res => {
-        this.router.navigate(['/start']);
-      });
+    this.dataGetter.logOut();
   }
 
   public getFavoritesForCurrentUser(){
     return this.http.get<any>(this.baseUrl + '/user?actionName=getFavoritesForCurrentUser');
   }
 
+  goToAdvertisementView(advertisement: Advertisement) {
+    console.log(advertisement.userId);
+    this.dataGetter.setUserId(advertisement.userId);
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.setAdvertisement(advertisement);
+    this.router.navigate(['/advertisement']);
+  }
 }

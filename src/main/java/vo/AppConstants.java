@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AppConstants {
 
-	//DB info
+    //DB info
 	public static String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres";
 	public static String DATABASE_USER = "max";
 	public static String DATABASE_PASSWORD = "2187";
@@ -46,11 +46,13 @@ public class AppConstants {
 	public static final String ADD_USER = "addUser";
 	public static final String GET_CURRENT_USER = "getCurrentUser";
 	public static final String LOG_OUT = "logOut";
+	public static final String GET_USER_BY_ID = "getUserById";
 
 	//AdvertisementServlet
 	public static final String GET_ALL_ADVERTISEMENT = "getAllAdvertisement";
 	public static final String GET_FILTERED_ADVERTISEMENT = "getFilteredAdvertisement";
 	public static final String ADD_ADVERTISEMENT_TO_FAVORITES = "addAdvertisementToFavorite";
 	public static final String GET_FAVORITES_FOR_CURRENT_USER = "getFavoritesForCurrentUser";
+	public static final String GET_FAVOR_BY_USER_ID_AND_AD_ID = "getFavorByIdAndAdId";
 	public static final String REMOVE_FROM_FAVORITES_FOR_CURRENT_USER = "removeFromFavoritesForCurrentUser";
 }

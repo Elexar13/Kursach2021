@@ -15,7 +15,7 @@ export class NewAdvertisementComponent implements OnInit {
   public currentUserId: number;
   public advertisement: Advertisement = new Advertisement();
   public advertisementId = 0;
-  public editMode: any = null;
+  public editMode = 'off';
   public filePath = 'assets/img/';
 
   constructor(private http: HttpClient,
@@ -25,16 +25,26 @@ export class NewAdvertisementComponent implements OnInit {
     this.currentUserId = dataGetter.getCurrentUserId();
     dataGetter.getUserById(this.currentUserId).subscribe(user => this.user = user);
     this.advertisement.userId = this.currentUserId;
-    if (!dataGetter.getAdvertisementEditMode) {
-
-    } else {
-      console.log('EDIT MODE');
-      this.editMode = 'on';
-      this.advertisement = dataGetter.getAdvertisement();
-    }
+    this.editMode = 'off';
   }
 
   ngOnInit(): void {
+    this.editMode = 'off';
+    if (!this.dataGetter.getAdvertisementEditMode) {
+      this.editMode = 'off';
+    } else {
+      console.log('EDIT MODE');
+      this.editMode = 'on';
+      this.advertisement = this.dataGetter.getAdvertisement();
+    }
+    this.dataGetter.getCurrentUser().subscribe(user => {
+      console.log(user);
+      if (user == null || !user.userId){
+        this.router.navigate(['/start']);
+      } else {
+        this.user = user;
+      }
+    });
   }
 
   goToFavorites() {

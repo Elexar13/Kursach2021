@@ -83,6 +83,17 @@ export class AdvertisementComponent implements OnInit {
       });
   }
 
+  goToMyAdvertisements() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.goToMyAdvertisements();
+  }
+
+  goToAddNewAdvertisement() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.setAdvertisementEditMode(null);
+    this.dataGetter.goToAddNewAdvertisement();
+  }
+
   goToFavorites() {
     this.dataGetter.setCurrentUserId(this.user.userId);
     this.dataGetter.goToFavorites();

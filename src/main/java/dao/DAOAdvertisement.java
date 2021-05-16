@@ -263,4 +263,21 @@ public class DAOAdvertisement extends BaseDAO{
         }
     }
 
+    public void deleteAdvertisement(Integer advertisementId) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM advertisement WHERE ad_id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, advertisementId);
+            rs = ps.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw ex;
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+    }
 }

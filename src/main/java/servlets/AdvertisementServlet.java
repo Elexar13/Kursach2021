@@ -41,10 +41,29 @@ public class AdvertisementServlet extends HttpServlet {
             } else if (AppConstants.UPDATE_ADVERTISEMENTS.equals(req.getParameter("actionName"))) {
                 updateAdvertisement(req, resp);
             }
+            else if (AppConstants.DELETE_ADVERTISEMENTS.equals(req.getParameter("actionName"))) {
+                deleteAdvertisement(req, resp);
+            }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void deleteAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Advertisement, Integer> servletUtil = new ServletUtil<>(req, resp);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = servletUtil.parseJSONString();
+
+        Integer advertisementId = mapper.readValue(json, Integer.class);
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        try {
+            daoAdvertisement.deleteAdvertisement(advertisementId);
+        } catch (Exception ex) {
+            System.out.println("Exception in AdvertisementServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendOK();
     }
 
     private void addAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -91,6 +110,9 @@ public class AdvertisementServlet extends HttpServlet {
         List<Advertisement> advertisementList = null;
         try {
             advertisementList = daoAdvertisement.getAdvertisementsOfCurrentUser(currentUserId);
+            for (Advertisement advertisement : advertisementList){
+                advertisement.setType(AppConstants.TYPE_MAP.get(advertisement.getType()));
+            }
         } catch (Exception ex) {
             System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
@@ -163,21 +185,9 @@ public class AdvertisementServlet extends HttpServlet {
         List<Advertisement> advertisementList = null;
         try {
             advertisementList = daoAdvertisement.getFavoritesForCurrentUser(currentUserId);
-        } catch (Exception ex) {
-            System.out.println("Exception in AdvertisementServlet - doPost.");
-            throw ex;
-        }
-        servletUtil.sendObject(advertisementList);
-    }
-
-    public void getAllAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        ServletUtil<Integer, List<Advertisement>> servletUtil = new ServletUtil<>(req, resp);
-        ObjectMapper mapper = new ObjectMapper();
-
-        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
-        List<Advertisement> advertisementList = null;
-        try {
-            advertisementList = daoAdvertisement.getAllAdvertisement();
+            for (Advertisement advertisement : advertisementList){
+                advertisement.setType(AppConstants.TYPE_MAP.get(advertisement.getType()));
+            }
         } catch (Exception ex) {
             System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;
@@ -196,6 +206,9 @@ public class AdvertisementServlet extends HttpServlet {
         List<Advertisement> advertisementList = null;
         try {
             advertisementList = daoAdvertisement.getFilteredAdvertisement(filterAdvertisement);
+            for (Advertisement advertisement : advertisementList){
+                advertisement.setType(AppConstants.TYPE_MAP.get(advertisement.getType()));
+            }
         } catch (Exception ex) {
             System.out.println("Exception in AdvertisementServlet - doPost.");
             throw ex;

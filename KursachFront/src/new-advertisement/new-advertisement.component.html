@@ -97,10 +97,10 @@
                              (change)="onFileSelected($event)" style="width: 500px;" required>
                     </div>
                   </div>
-                  <div *ngIf="!editMode" class="form-button mt-3 float-sm-start">
+                  <div *ngIf="editMode == 'off'" class="form-button mt-3 float-sm-start">
                     <button id="add" type="button" class="btn btn-light" (click)="addAdvertisement(advertisement)">Додати</button>
                   </div>
-                  <div *ngIf="editMode" class="form-button mt-3 float-sm-start">
+                  <div *ngIf="editMode == 'on'" class="form-button mt-3 float-sm-start">
                     <button id="update" type="button" class="btn btn-light" (click)="updateAdvertisement(advertisement)">Змінити</button>
                   </div>
                 </form>

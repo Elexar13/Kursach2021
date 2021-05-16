@@ -36,8 +36,8 @@ public class AppConstants {
 
 	public static Map<String, String> TYPE_MAP = new HashMap<>();
 	static {
-		TYPE_MAP.put("sale", "Придбати нерухомість");
-		TYPE_MAP.put("rent", "Арендувати нерухомість");
+		TYPE_MAP.put("sale", "Продаж нерухомості");
+		TYPE_MAP.put("rent", "Оренда нерухомості");
 	}
 
 	//////Action names
@@ -51,6 +51,7 @@ public class AppConstants {
 	//AdvertisementServlet
 	public static final String ADD_ADVERTISEMENTS = "addAdvertisement";
 	public static final String UPDATE_ADVERTISEMENTS = "updateAdvertisement";
+	public static final String DELETE_ADVERTISEMENTS = "deleteAdvertisement";
 	public static final String GET_ALL_ADVERTISEMENT = "getAllAdvertisement";
 	public static final String GET_FILTERED_ADVERTISEMENT = "getFilteredAdvertisement";
 	public static final String ADD_ADVERTISEMENT_TO_FAVORITES = "addAdvertisementToFavorite";

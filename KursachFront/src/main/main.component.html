@@ -65,6 +65,7 @@
 
         <li *ngFor="let advertisement of advertisements; index as i;">
           <div style="width: 65%; margin: auto; border: 1px solid #222; border-radius: 4px">
+            <h6><b>{{advertisement.type}}</b></h6>
             <div class="row" style="margin-top: 10px">
               <div class="col">
                 <img src="{{advertisement.filePath}}" height="350" width="450"/>

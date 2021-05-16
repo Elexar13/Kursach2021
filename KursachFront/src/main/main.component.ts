@@ -67,6 +67,7 @@ export class MainComponent implements OnInit {
 
   goToAddNewAdvertisement() {
     this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.setAdvertisementEditMode(null);
     this.dataGetter.goToAddNewAdvertisement();
   }
 }

@@ -25,6 +25,14 @@ export class MyAdvertisementsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataGetter.getCurrentUser().subscribe(user => {
+      console.log(user);
+      if (user == null || !user.userId){
+        this.router.navigate(['/start']);
+      } else {
+        this.user = user;
+      }
+    });
   }
 
   public getAdvertisementsOfCurrentUser() {
@@ -57,6 +65,7 @@ export class MyAdvertisementsComponent implements OnInit {
 
   goToAddNewAdvertisement() {
     this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.setAdvertisementEditMode(null);
     this.dataGetter.goToAddNewAdvertisement();
   }
 
@@ -64,5 +73,10 @@ export class MyAdvertisementsComponent implements OnInit {
     this.dataGetter.setAdvertisement(advertisement);
     this.dataGetter.setAdvertisementEditMode('edit');
     this.dataGetter.goToAddNewAdvertisement();
+  }
+
+  deleteAdvertisement(advertisementId: number) {
+    return this.http.post<any>(this.baseUrl + '/advertisement?actionName=deleteAdvertisement', advertisementId)
+      .toPromise();
   }
 }

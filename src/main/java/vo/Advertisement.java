@@ -11,14 +11,15 @@ public class Advertisement {
     private Integer countOfRoom;
     private String description;
     private String status;
-    private String filepath;
+    private String filePath;
+    private String isFavorite;
 
     public Advertisement() {
     }
 
-    public Advertisement(Integer adId, User user, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description, String status, String filepath) {
+    public Advertisement(Integer adId, Integer userId, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description, String status, String filePath) {
         this.adId = adId;
-        this.user = user;
+        this.userId = userId;
         this.city = city;
         this.type = type;
         this.adTitle = adTitle;
@@ -26,7 +27,7 @@ public class Advertisement {
         this.countOfRoom = countOfRoom;
         this.description = description;
         this.status = status;
-        this.filepath = filepath;
+        this.filePath = filePath;
     }
 
     public Advertisement(Integer userId, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description) {
@@ -116,5 +117,21 @@ public class Advertisement {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filepath) {
+        this.filePath = filepath;
     }
 }

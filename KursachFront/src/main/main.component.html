@@ -64,60 +64,37 @@
         </div>
 
         <li *ngFor="let advertisement of advertisements; index as i;">
-          <div style="width: 50%; position: center">
-            <div class="row" >
+          <div style="width: 40%; position: center; margin: 10px; border: 1px solid #222; border-radius: 4px">
+            <div class="row" style="margin-top: 10px">
               <div class="col">
-                <img src="assets/img/1.jpg" height="250" width="350"/>
+                <img src="{{advertisement.filePath}}" height="250" width="350"/>
+              </div>
+            </div>
+            <div class="row text-start">
+              <div class="col text-start">
+                {{advertisement.adTitle}}
+              </div>
+            </div>
+            <div class="row text-start">
+              <div class="col">
+                {{advertisement.price}} $
+              </div>
+            </div>
+            <div class="row text-start">
+              <div class="col">
+                {{advertisement.countOfRoom}} кімнат
               </div>
             </div>
             <div class="row text-end">
-              {{advertisement.adTitle}}
-            </div>
-            <div class="row text-end">
-              {{advertisement.price}} $
-            </div>
-            <div class="row text-end">
               <div class="col">
-                {{advertisement.countOfRoom}} $
+                <button class="btn"><i class="bi bi-heart text-end" style="margin: 10px"></i></button>
               </div>
               <div class="col">
-                <i class="fa fa-heart"></i>
+                <button class="btn"><i class="bi bi-heart-fill text-end" style="margin: 10px"></i></button>
               </div>
             </div>
           </div>
         </li>
-
-
-        <div style="width: 40%; position: center; margin: 10px; border: 1px solid #222; border-radius: 4px">
-          <div class="row" style="margin-top: 10px">
-            <div class="col">
-              <img src="assets/img/1.jpg" height="250" width="350"/>
-            </div>
-          </div>
-          <div class="row text-start">
-            <div class="col text-start">
-              Advertisement title
-            </div>
-          </div>
-          <div class="row text-start">
-            <div class="col">
-             1000 $
-            </div>
-          </div>
-          <div class="row text-start">
-            <div class="col">
-              4 room
-            </div>
-          </div>
-          <div class="row text-end">
-            <div class="col">
-              <button class="btn"><i class="bi bi-heart text-end" style="margin: 10px"></i></button>
-            </div>
-            <div class="col">
-              <button class="btn"><i class="bi bi-heart-fill text-end" style="margin: 10px"></i></button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="col-sm-2 sidenav">
@@ -127,7 +104,7 @@
         </a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані оголошення</a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>
+        <a href="/start" (click)="logOut()" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>
       </div>
     </div>
   </div>

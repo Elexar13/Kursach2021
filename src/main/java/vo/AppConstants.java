@@ -42,9 +42,15 @@ public class AppConstants {
 
 	//////Action names
 	//UserServlet
-	public static String GET_USER = "getUser";
-	public static String ADD_USER = "addUser";
-	//AdvertisementServler
-	public static String GET_ALL_ADVERTISEMENT = "getAllAdvertisement";
-	public static String GET_FILTERED_ADVERTISEMENT = "getFilteredAdvertisement";
+	public static final String GET_USER = "getUser";
+	public static final String ADD_USER = "addUser";
+	public static final String GET_CURRENT_USER = "getCurrentUser";
+	public static final String LOG_OUT = "logOut";
+
+	//AdvertisementServlet
+	public static final String GET_ALL_ADVERTISEMENT = "getAllAdvertisement";
+	public static final String GET_FILTERED_ADVERTISEMENT = "getFilteredAdvertisement";
+	public static final String ADD_ADVERTISEMENT_TO_FAVORITES = "addAdvertisementToFavorite";
+	public static final String GET_FAVORITES_FOR_CURRENT_USER = "getFavoritesForCurrentUser";
+	public static final String REMOVE_FROM_FAVORITES_FOR_CURRENT_USER = "removeFromFavoritesForCurrentUser";
 }

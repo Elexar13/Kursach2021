@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,11 +33,21 @@ public class UserServlet extends HttpServlet {
                 getUser(req, resp);
             } else if (AppConstants.ADD_USER.equals(req.getParameter("actionName"))) {
                 addUser(req, resp);
+            } else if (AppConstants.GET_CURRENT_USER.equals(req.getParameter("actionName"))) {
+                getCurrentUser(req, resp);
+            } else if (AppConstants.LOG_OUT.equals(req.getParameter("actionName"))) {
+                logOut(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void getCurrentUser(HttpServletRequest req, HttpServletResponse resp) {
+        ServletUtil<User, User> servletUtil = new ServletUtil<>(req, resp);
+        User user = (User) req.getSession().getAttribute("currentUser");
+        servletUtil.sendObject(user);
     }
 
     private void getUser(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -49,6 +60,8 @@ public class UserServlet extends HttpServlet {
         User userOut = null;
         try {
             userOut = daoUser.getUser(userIn);
+            HttpSession session = req.getSession();
+            session.setAttribute("currentUser", userOut);
         } catch (Exception ex) {
             System.out.println("Exception in LoginServlet - doPost.");
             throw ex;
@@ -71,5 +84,9 @@ public class UserServlet extends HttpServlet {
             throw ex;
         }
         servletUtil.sendObject(userId);
+    }
+
+    private void logOut(HttpServletRequest req, HttpServletResponse resp) {
+        req.getSession().removeAttribute("currentUser");
     }
 }

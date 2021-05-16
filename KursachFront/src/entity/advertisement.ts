@@ -9,6 +9,8 @@ export class Advertisement {
     public adTitle?: string,
     public price?: number,
     public countOfRoom?: number,
-    public description?: number
+    public description?: number,
+    public filePath?: string,
+    public isFavorite?: string
   ) {}
 }

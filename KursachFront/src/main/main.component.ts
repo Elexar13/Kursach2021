@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Advertisement} from '../entity/advertisement';
-import {newArray} from '@angular/compiler/src/util';
 import {DataGetterService} from '../app/data-getter.service';
 import {User} from '../entity/user';
 import {Router} from '@angular/router';
@@ -13,10 +12,10 @@ import {Router} from '@angular/router';
 })
 export class MainComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
-  public user: any;
-  public fav: boolean;
+  public user: User = new User();
   filePath = '../../images/1.jpg';
   public advertisements: any;
+  public favoriteAdvertisements: any;
   public filterAdvertisement: Advertisement = new Advertisement();
 
   constructor(private dataGetter: DataGetterService,
@@ -24,10 +23,16 @@ export class MainComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit(): void {
-    this.getAllAdvertisment();
-    this.filterAdvertisement.city = 'Місто';
-    this.user = this.dataGetter.getUser();
-    console.log(this.user);
+    this.getCurrentUser().subscribe(user => {
+      console.log(user);
+      if (user == null || !user.userId){
+        this.router.navigate(['/start']);
+      } else {
+        this.user = user;
+      }
+    });
+    this.getFavoritesForCurrentUser();
+    this.getFilteredAdvertisement();
   }
 
   public getAllAdvertisment() {
@@ -38,11 +43,25 @@ export class MainComponent implements OnInit {
   }
 
   public getFilteredAdvertisement() {
-    console.log(this.filterAdvertisement)
     this.http.post<any>(this.baseUrl + '/advertisement?actionName=getFilteredAdvertisement', this.filterAdvertisement)
       .subscribe((advList: any) => {
         this.advertisements = advList;
       });
+  }
+
+  public getCurrentUser(){
+    return this.http.get<any>(this.baseUrl + '/user?actionName=getCurrentUser');
+  }
+
+  public logOut(){
+    return this.http.get<any>(this.baseUrl + '/user?actionName=logOut')
+      .subscribe(res => {
+        this.router.navigate(['/start']);
+      });
+  }
+
+  public getFavoritesForCurrentUser(){
+    return this.http.get<any>(this.baseUrl + '/user?actionName=getFavoritesForCurrentUser');
   }
 
 }

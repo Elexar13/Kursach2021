@@ -53,6 +53,11 @@ export class FavoritesComponent implements OnInit {
     this.dataGetter.goToMyAdvertisements();
   }
 
+  goToAddNewAdvertisement() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.goToAddNewAdvertisement();
+  }
+
   public logOut(){
     this.dataGetter.logOut();
   }

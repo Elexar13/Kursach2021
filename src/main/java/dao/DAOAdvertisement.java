@@ -23,7 +23,7 @@ public class DAOAdvertisement extends BaseDAO{
             rs = ps.executeQuery();
             while(rs.next()){
                 User user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("username"), rs.getString("lastname"), rs.getString("password"), rs.getString("phone_number"), rs.getString("is_admin"));
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("ad_address"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -76,7 +76,7 @@ public class DAOAdvertisement extends BaseDAO{
             }
             rs = ps.executeQuery();
             while(rs.next()){
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("ad_address"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -123,7 +123,7 @@ public class DAOAdvertisement extends BaseDAO{
             ps.setInt(1, currentUserId);
             rs = ps.executeQuery();
             while(rs.next()){
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("ad_address"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -191,7 +191,7 @@ public class DAOAdvertisement extends BaseDAO{
             ps.setInt(1, currentUserId);
             rs = ps.executeQuery();
             while(rs.next()){
-                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("ad_address"), rs.getString("status"), rs.getString("filepath"));
                 advertisementList.add(advertisement);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -201,4 +201,66 @@ public class DAOAdvertisement extends BaseDAO{
         }
         return advertisementList;
     }
+
+    public Integer addAdvertisement(Advertisement advertisement) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO advertisement (user_id, type, city, price, count_of_room, ad_title, description, ad_address, status, filepath) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING ad_id";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, advertisement.getUserId());
+            ps.setString(2, advertisement.getType());
+            ps.setString(3, advertisement.getCity());
+            ps.setInt(4, advertisement.getPrice());
+            ps.setInt(5, advertisement.getCountOfRoom());
+            ps.setString(6, advertisement.getAdTitle());
+            ps.setString(7, advertisement.getDescription());
+            ps.setString(8, advertisement.getAddress());
+            ps.setString(9, "waiting_for_approve");
+            ps.setString(10, advertisement.getFilePath());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ad_id");
+            }
+            return null;
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw ex;
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+    }
+
+    public Integer updateAdvertisement(Advertisement advertisement) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE advertisement SET type = ?, city = ?, price = ?, count_of_room = ?, " +
+                " ad_title = ?, description = ?, filepath = ?, ad_address = ? WHERE ad_id = ? RETURNING ad_id";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, advertisement.getType());
+            ps.setString(2, advertisement.getCity());
+            ps.setInt(3, advertisement.getPrice());
+            ps.setInt(4, advertisement.getCountOfRoom());
+            ps.setString(5, advertisement.getAdTitle());
+            ps.setString(6, advertisement.getDescription());
+            ps.setString(7, advertisement.getFilePath());
+            ps.setString(8, advertisement.getAddress());
+            ps.setInt(9, advertisement.getAdId());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ad_id");
+            }
+            return null;
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw ex;
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+    }
+
 }

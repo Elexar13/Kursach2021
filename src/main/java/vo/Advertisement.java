@@ -10,6 +10,7 @@ public class Advertisement {
     private Integer price;
     private Integer countOfRoom;
     private String description;
+    private String address;
     private String status;
     private String filePath;
 
@@ -18,7 +19,7 @@ public class Advertisement {
     public Advertisement() {
     }
 
-    public Advertisement(Integer adId, Integer userId, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description, String status, String filePath) {
+    public Advertisement(Integer adId, Integer userId, String city, String type, String adTitle, Integer price, Integer countOfRoom, String description, String address, String status, String filePath) {
         this.adId = adId;
         this.userId = userId;
         this.city = city;
@@ -27,6 +28,7 @@ public class Advertisement {
         this.price = price;
         this.countOfRoom = countOfRoom;
         this.description = description;
+        this.address = address;
         this.status = status;
         this.filePath = filePath;
     }
@@ -142,5 +144,13 @@ public class Advertisement {
 
     public void setIsFavorite(String isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

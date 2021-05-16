@@ -14,6 +14,7 @@ export class DataGetterService {
   public advertisement: any;
   private userId = 0;
   private currentUserId: any;
+  public advertisementEditMode = null;
 
   constructor(private http: HttpClient, public router: Router) { }
 
@@ -65,6 +66,14 @@ export class DataGetterService {
     return this.currentUserId;
   }
 
+  getAdvertisementEditMode(){
+    return this.advertisementEditMode;
+  }
+
+  setAdvertisementEditMode(mode: any){
+    this.advertisementEditMode = mode;
+  }
+
   goToAdvertisementView() {
     this.router.navigate(['/advertisement']);
   }
@@ -75,5 +84,9 @@ export class DataGetterService {
 
   goToMyAdvertisements() {
     this.router.navigate(['/my-advertisement']);
+  }
+
+  goToAddNewAdvertisement() {
+    this.router.navigate(['/new-advertisement']);
   }
 }

@@ -1,1 +1,128 @@
-<p>new-advertisement works!</p>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+
+    </div>
+    <div class="col-sm-8 text-left">
+      <div class="content" role="main">
+        <div class="form-body">
+          <div class="form-holder">
+            <div class="form-content">
+              <div class="form-items">
+                <form class="requires-validation" novalidate>
+                  <div class="row">
+                    <div class="col-1" >
+                      <label style="margin-top: 25px; padding: 5px">Тип</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px">
+                    <select class="custom-select" [(ngModel)]="advertisement.type" name="type" style="width: 250px">
+                      <option value="sale" selected>Придбати нерухомість</option>
+                      <option value="rent">Арендувати нерухомість</option>
+                    </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-1">
+                      <label style="margin-top: 25px; padding: 5px">Місто</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px">
+                    <select class="custom-select" [(ngModel)]="advertisement.city" name="city" style="width: 250px;">
+                      <option value="niko" selected>Миколаїв</option>
+                      <option value="odessa">Одеса</option>
+                      <option value="kiev">Київ</option>
+                      <option value="kharkov">Харків</option>
+                      <option value="dnepr">Дніпро</option>
+                      <option value="zapor">Запоріжжя</option>
+                      <option value="lvov">Лвів</option>
+                      <option value="rog">Кривий Ріг</option>
+                      <option value="vinnitsa">Вінниця</option>
+                      <option value="kherson">Херсон</option>
+                      <option value="chernihiv">Чернігів</option>
+                      <option value="poltava">Полтава</option>
+                      <option value="cherkassi">Черкаси</option>
+                      <option value="khmel">Хмельницький</option>
+                      <option value="chernivtsi">Чернівці</option>
+                      <option value="zhitomir">Житомир</option>
+                      <option value="summi">Сумми</option>
+                      <option value="rivne">Рівне</option>
+                      <option value="ternopil">Тернопіль</option>
+                      <option value="krop">Кропівницький</option>
+                    </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-1">
+                    <label style="margin-top: 15px; padding: 5px">Кількість кімнат</label>
+                  </div>
+                    <div class="col-4" style="margin-left: 50px">
+                    <input class="form-control" type="number" min="0" step="1" name="countOfRoom"
+                           [(ngModel)]="advertisement.countOfRoom" style="width: 250px;" required>
+                    </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <label style="margin-top: 15px; padding: 5px">Ціна $</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px">
+                    <input class="form-control" type="number" min="0" step="50" id="price" name="price"
+                           [(ngModel)]="advertisement.price" style="width: 250px;" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <label style="margin-top: 15px; padding: 5px">Заголовок</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px">
+                      <input class="form-control" type="text" id="adTitle" name="adTitle"
+                             [(ngModel)]="advertisement.adTitle" style="width: 500px;" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <label style="margin-top: 15px; padding: 5px">Адреса</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px">
+                      <input class="form-control" type="text" id="address" name="address"
+                             [(ngModel)]="advertisement.address" style="width: 500px;" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <label style="margin-top: 10px; padding: 5px">Фото вашої нерухомості</label>
+                    </div>
+                    <div class="col-4" style="margin-left: 50px; margin-top: 20px">
+                      <input class="form-control" type="file" id="file" name="file"
+                             (change)="onFileSelected($event)" style="width: 500px;" required>
+                    </div>
+                  </div>
+                  <div *ngIf="!editMode" class="form-button mt-3 float-sm-start">
+                    <button id="add" type="button" class="btn btn-light" (click)="addAdvertisement(advertisement)">Додати</button>
+                  </div>
+                  <div *ngIf="editMode" class="form-button mt-3 float-sm-start">
+                    <button id="update" type="button" class="btn btn-light" (click)="updateAdvertisement(advertisement)">Змінити</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div *ngIf="user.userId" class="list-group text-start" style="position: fixed;">
+        <a href="#" class="list-group-item list-group-item-action bg-dark disabled text-center">
+          {{user.username}} {{user.lastname}}
+        </a>
+        <a class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
+        <a (click)="goToMyAdvertisements()" class="list-group-item list-group-item-action"><i
+          class="bi bi-house-fill"></i> Мої оголошення</a>
+        <a (click)="goToFavorites()" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані
+          оголошення</a>
+        <a href="/start" (click)="logOut()" class="list-group-item list-group-item-action"><i
+          class="fa fa-sign-out"></i> Вийти з акаунту</a>
+      </div>
+    </div>
+  </div>
+</div>

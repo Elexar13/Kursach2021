@@ -23,7 +23,8 @@ const routes = [
   {path: 'main', component: MainComponent},
   {path: 'advertisement', component: AdvertisementComponent},
   {path: 'favorites', component: FavoritesComponent},
-  {path: 'my-advertisement', component: MyAdvertisementsComponent}
+  {path: 'my-advertisement', component: MyAdvertisementsComponent},
+  {path: 'new-advertisement', component: NewAdvertisementComponent}
 ];
 
 @NgModule({

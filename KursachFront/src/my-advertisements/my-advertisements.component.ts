@@ -54,4 +54,15 @@ export class MyAdvertisementsComponent implements OnInit {
   public logOut(){
     this.dataGetter.logOut();
   }
+
+  goToAddNewAdvertisement() {
+    this.dataGetter.setCurrentUserId(this.user.userId);
+    this.dataGetter.goToAddNewAdvertisement();
+  }
+
+  goToEditAdvertisement(advertisement: Advertisement) {
+    this.dataGetter.setAdvertisement(advertisement);
+    this.dataGetter.setAdvertisementEditMode('edit');
+    this.dataGetter.goToAddNewAdvertisement();
+  }
 }

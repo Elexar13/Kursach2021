@@ -8,6 +8,7 @@ export class Advertisement {
     public city?: string,
     public type?: string,
     public adTitle?: string,
+    public address?: string,
     public price?: number,
     public countOfRoom?: number,
     public description?: number,

@@ -36,11 +36,49 @@ public class AdvertisementServlet extends HttpServlet {
                 getFavorByIdAndAdId(req, resp);
             } else if (AppConstants.GET_ADVERTISEMENTS_OF_CURRENT_USER.equals(req.getParameter("actionName"))) {
                 getAdvertisementsOfCurrentUser(req, resp);
+            } else if (AppConstants.ADD_ADVERTISEMENTS.equals(req.getParameter("actionName"))) {
+                addAdvertisement(req, resp);
+            } else if (AppConstants.UPDATE_ADVERTISEMENTS.equals(req.getParameter("actionName"))) {
+                updateAdvertisement(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void addAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Advertisement, Integer> servletUtil = new ServletUtil<>(req, resp);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = servletUtil.parseJSONString();
+
+        Advertisement advertisement = mapper.readValue(json, Advertisement.class);
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        Integer advertisementId = null;
+        try {
+            advertisementId = daoAdvertisement.addAdvertisement(advertisement);
+        } catch (Exception ex) {
+            System.out.println("Exception in AdvertisementServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(advertisementId);
+    }
+
+    private void updateAdvertisement(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        ServletUtil<Advertisement, Integer> servletUtil = new ServletUtil<>(req, resp);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = servletUtil.parseJSONString();
+
+        Advertisement advertisement = mapper.readValue(json, Advertisement.class);
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        Integer advertisementId = null;
+        try {
+            advertisementId = daoAdvertisement.updateAdvertisement(advertisement);
+        } catch (Exception ex) {
+            System.out.println("Exception in AdvertisementServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(advertisementId);
     }
 
     private void getAdvertisementsOfCurrentUser(HttpServletRequest req, HttpServletResponse resp) {

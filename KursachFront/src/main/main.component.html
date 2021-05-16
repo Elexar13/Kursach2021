@@ -94,7 +94,7 @@
         <a href="#" class="list-group-item list-group-item-action bg-dark disabled text-center">
           {{user.username}} {{user.lastname}}
         </a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
+        <a (click)="goToAddNewAdvertisement()" class="list-group-item list-group-item-action"><i class="fa fa-plus"></i> Додати оголошення</a>
         <a (click)="goToMyAdvertisements()" class="list-group-item list-group-item-action"><i class="bi bi-house-fill"></i> Мої оголошення</a>
         <a (click)="goToFavorites()" class="list-group-item list-group-item-action"><i class="fa fa-heart"></i> Обрані оголошення</a>
         <a href="/start" (click)="logOut()" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Вийти з акаунту</a>

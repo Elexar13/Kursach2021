@@ -49,6 +49,8 @@ public class AppConstants {
 	public static final String GET_USER_BY_ID = "getUserById";
 
 	//AdvertisementServlet
+	public static final String ADD_ADVERTISEMENTS = "addAdvertisement";
+	public static final String UPDATE_ADVERTISEMENTS = "updateAdvertisement";
 	public static final String GET_ALL_ADVERTISEMENT = "getAllAdvertisement";
 	public static final String GET_FILTERED_ADVERTISEMENT = "getFilteredAdvertisement";
 	public static final String ADD_ADVERTISEMENT_TO_FAVORITES = "addAdvertisementToFavorite";

@@ -6,25 +6,33 @@
     <div class="col-sm-8 text-left">
       <div class="content" role="main">
         <li *ngFor="let advertisement of advertisements; index as i;">
-          <div style="width: 65%; margin: auto; border: 1px solid #222; border-radius: 4px">
-            <div class="row" style="margin-top: 10px">
-              <div class="col">
-                <img src="{{advertisement.filePath}}" height="350" width="450"/>
+          <div class="list-group text-start">
+            <div class="list-group-item list-group-item-action">
+              <div class="row" style="margin-top: 10px">
+                <div class="col">
+                  <img src="{{advertisement.filePath}}" height="350" width="450"/>
+                </div>
               </div>
-            </div>
-            <div class="row text-start">
-              <div class="col text-start">
-                <a class="link-dark" (click)="goToAdvertisementView(advertisement)">{{advertisement.adTitle}}</a>
+              <div class="row text-start">
+                <div class="col text-start">
+                  <a class="link-dark" (click)="goToAdvertisementView(advertisement)">{{advertisement.adTitle}}</a>
+                </div>
               </div>
-            </div>
-            <div class="row text-start">
-              <div class="col">
-                {{advertisement.price}} $
+              <div class="row text-start">
+                <div class="col">
+                  {{advertisement.price}} $
+                </div>
               </div>
-            </div>
-            <div class="row text-start">
-              <div class="col">
-                {{advertisement.countOfRoom}} кімнат
+              <div class="row text-start">
+                <div class="col">
+                  {{advertisement.countOfRoom}} кімнат
+                </div>
+              </div>
+              <div class="row text-end">
+                <div class="col">
+                  <button class="btn"><i class="bi bi-pen-fill text-end"></i></button>
+                  <button class="btn"><i class="bi bi-trash text-end"></i></button>
+                </div>
               </div>
             </div>
           </div>

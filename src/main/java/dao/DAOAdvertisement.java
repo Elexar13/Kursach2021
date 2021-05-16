@@ -37,7 +37,7 @@ public class DAOAdvertisement extends BaseDAO{
     public List<Advertisement> getFilteredAdvertisement(Advertisement filterAdvertisement) {
         List<Advertisement> advertisementList = new ArrayList<>();
         String sql = "SELECT * FROM public.advertisement a" +
-                " WHERE user_id IS NOT NULL ";
+                " WHERE user_id IS NOT NULL AND status = 'approved'";
         if (filterAdvertisement.getType() != null && AppConstants.TYPE_MAP.containsKey(filterAdvertisement.getType())){
             sql += "AND type = ? ";
         }
@@ -177,5 +177,28 @@ public class DAOAdvertisement extends BaseDAO{
             super.finalizeDAO(connection, rs, ps);
         }
         return null;
+    }
+
+    public List<Advertisement> getAdvertisementsOfCurrentUser(Integer currentUserId) {
+        List<Advertisement> advertisementList = new ArrayList<>();
+        String sql = "SELECT * FROM advertisement WHERE user_id = ? AND status = 'approved'";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        try{
+            connection = super.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, currentUserId);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Advertisement advertisement = new Advertisement(rs.getInt("ad_id"), rs.getInt("user_id"), rs.getString("city"), rs.getString("type"), rs.getString("ad_title"), rs.getInt("price"), rs.getInt("count_of_room"), rs.getString("description"), rs.getString("status"), rs.getString("filepath"));
+                advertisementList.add(advertisement);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            super.finalizeDAO(connection, rs, ps);
+        }
+        return advertisementList;
     }
 }

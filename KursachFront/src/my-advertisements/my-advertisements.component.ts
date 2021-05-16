@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {DataGetterService} from '../app/data-getter.service';
-import {Router} from '@angular/router';
-import {User} from "../entity/user";
+import {HttpClient} from "@angular/common/http";
+import {DataGetterService} from "../app/data-getter.service";
+import {Router} from "@angular/router";
 import {Advertisement} from "../entity/advertisement";
-import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.css']
+  selector: 'app-my-advertisements',
+  templateUrl: './my-advertisements.component.html',
+  styleUrls: ['./my-advertisements.component.css']
 })
-export class FavoritesComponent implements OnInit {
+export class MyAdvertisementsComponent implements OnInit {
   baseUrl = 'http://localhost:8080/Kursach2021';
   public user: any;
   public currentUserId: number;
@@ -23,14 +21,14 @@ export class FavoritesComponent implements OnInit {
   {
     this.currentUserId = dataGetter.getCurrentUserId();
     dataGetter.getUserById(this.currentUserId).subscribe(user => this.user = user);
-    this.getFavoritesForCurrentUser();
+    this.getAdvertisementsOfCurrentUser();
   }
 
   ngOnInit(): void {
   }
 
-  public getFavoritesForCurrentUser() {
-    this.http.get<any>(this.baseUrl + '/advertisement?actionName=getFavoritesForCurrentUser')
+  public getAdvertisementsOfCurrentUser() {
+    this.http.get<any>(this.baseUrl + '/advertisement?actionName=getAdvertisementsOfCurrentUser')
       .subscribe((advList: any) => {
         this.advertisements = advList;
       });
@@ -56,5 +54,4 @@ export class FavoritesComponent implements OnInit {
   public logOut(){
     this.dataGetter.logOut();
   }
-
 }

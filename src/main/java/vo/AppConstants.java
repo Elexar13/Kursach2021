@@ -55,4 +55,5 @@ public class AppConstants {
 	public static final String GET_FAVORITES_FOR_CURRENT_USER = "getFavoritesForCurrentUser";
 	public static final String GET_FAVOR_BY_USER_ID_AND_AD_ID = "getFavorByIdAndAdId";
 	public static final String REMOVE_FROM_FAVORITES_FOR_CURRENT_USER = "removeFromFavoritesForCurrentUser";
+	public static final String GET_ADVERTISEMENTS_OF_CURRENT_USER = "getAdvertisementsOfCurrentUser";
 }

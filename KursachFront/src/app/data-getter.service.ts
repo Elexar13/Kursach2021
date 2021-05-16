@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../entity/user';
 import {Router} from '@angular/router';
 import {Advertisement} from '../entity/advertisement';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +71,9 @@ export class DataGetterService {
 
   goToFavorites() {
     this.router.navigate(['/favorites']);
+  }
+
+  goToMyAdvertisements() {
+    this.router.navigate(['/my-advertisement']);
   }
 }

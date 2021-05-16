@@ -34,11 +34,30 @@ public class AdvertisementServlet extends HttpServlet {
                 removeFromFavoritesForCurrentUser(req, resp);
             } else if (AppConstants.GET_FAVOR_BY_USER_ID_AND_AD_ID.equals(req.getParameter("actionName"))) {
                 getFavorByIdAndAdId(req, resp);
+            } else if (AppConstants.GET_ADVERTISEMENTS_OF_CURRENT_USER.equals(req.getParameter("actionName"))) {
+                getAdvertisementsOfCurrentUser(req, resp);
             }
         } catch (Exception ex){
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unknown Business Error");
         }
 
+    }
+
+    private void getAdvertisementsOfCurrentUser(HttpServletRequest req, HttpServletResponse resp) {
+        ServletUtil<Integer, List<Advertisement>> servletUtil = new ServletUtil<>(req, resp);
+
+        User user = (User) req.getSession().getAttribute("currentUser");
+        Integer currentUserId = user.getUserId();
+
+        DAOAdvertisement daoAdvertisement = new DAOAdvertisement();
+        List<Advertisement> advertisementList = null;
+        try {
+            advertisementList = daoAdvertisement.getAdvertisementsOfCurrentUser(currentUserId);
+        } catch (Exception ex) {
+            System.out.println("Exception in AdvertisementServlet - doPost.");
+            throw ex;
+        }
+        servletUtil.sendObject(advertisementList);
     }
 
     private void getFavorByIdAndAdId(HttpServletRequest req, HttpServletResponse resp) throws Exception {
